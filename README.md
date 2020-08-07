@@ -1,3 +1,5 @@
+A program I made to help with revision. Here is a generalized list of all of its features:
+
 - An explorer for creating, modifying, moving and deleting files and folders.
 
 - Flashcards - collections of cards with information on both sides for testing yourself and learning information.
