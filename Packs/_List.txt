@@ -1,7 +1,15 @@
-Biology
+AQA Command words
 -
-A pack of flashcards for many Biology topics.
+A set of flashcards for the meanings of the many command words in AQA test papers specifically.
 -
-Chemistry
+Chemistry - Atomic Structure and Periodic Table
 -
-A pack of flashcards for many Chemistry topics.
+Revision material for the atomic structure and Periodic Table topics in Chemistry.
+-
+Maths 1
+-
+Flashcards for revising formulas and types of algebraic representations.
+-
+Spanish - Vocab Lists 1
+-
+A pack for revising lists of Spanish vocab.
