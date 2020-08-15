@@ -17,3 +17,5 @@ A program I made to help with revision. Here is a generalized list of all of its
 - Themes - Allows you to make your own colour schemes for the app.
 
 - Pack downloads - Allows you to download folders containing revision material from this repository.
+
+NOTE: This repository is currently only being used for downloading packs and the software itself. I do not intend to publish the source code at the moment.
