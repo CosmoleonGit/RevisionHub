@@ -18,4 +18,4 @@ A program I made to help with revision. Here is a generalized list of all of its
 
 - Pack downloads - Allows you to download folders containing revision material from this repository.
 
-NOTE: This repository is currently only being used for downloading packs and the software itself. I will probably publish the source code at some point, but for now it isn't neccessary for me.
+NOTE: This repository is currently only being used for downloading packs and the software itself. I will probably publish the source code at some point, but for now it isn't necessary for me.
