@@ -6,6 +6,10 @@ Chemistry - Atomic Structure and Periodic Table
 -
 Revision material for the atomic structure and Periodic Table topics in Chemistry.
 -
+Chemistry - Bonding and Structure
+-
+A pack of flashcards about bonding and structure in Chemistry.
+-
 Physics Equations
 -
 Flashcards for all the equations needed for GCSE physics.
@@ -17,3 +21,7 @@ Flashcards for revising formulas and types of algebraic representations.
 Spanish - Vocab Lists 1
 -
 A pack for revising lists of Spanish vocab.
+-
+Spanish - Tense Codes
+-
+A pack containing verb endings for all tenses, and the changes between AR, ER or IR verbs.
