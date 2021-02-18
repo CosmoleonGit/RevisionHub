@@ -1,0 +1,55 @@
+﻿using RevisionProgram2.Themes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace RevisionProgram2.folderSync
+{
+    public partial class OnlineChoose : Form
+    {
+        public OnlineChoose()
+        {
+            InitializeComponent();
+        }
+
+        private void OnlineChoose_Load(object sender, EventArgs e)
+        {
+            Theme.ChangeFormTheme(this);
+        }
+
+        public bool Host => HostRadio.Checked;
+
+        public string IP => IPTxt.Text;
+        public int Port => (int)PortNumeric.Value;
+
+        private void ConnectBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void HostRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (JoinRadio.Checked)
+            {
+                IPLbl.Enabled = true;
+                IPTxt.Enabled = true;
+            }
+        }
+
+        private void JoinRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (HostRadio.Checked)
+            {
+                IPLbl.Enabled = false;
+                IPTxt.Enabled = false;
+            }
+        }
+    }
+}

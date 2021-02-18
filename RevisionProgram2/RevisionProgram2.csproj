@@ -1,0 +1,542 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7B58E4AB-E5E8-4A58-85BD-F99A277310C0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RevisionProgram2</RootNamespace>
+    <AssemblyName>RevisionHub</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\revision program.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="about\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="about\AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="alerts\Alert.cs" />
+    <Compile Include="alerts\AlertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="alerts\AlertForm.Designer.cs">
+      <DependentUpon>AlertForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="alerts\ModifyAlert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="alerts\ModifyAlert.Designer.cs">
+      <DependentUpon>ModifyAlert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\MsgBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\MsgBox.Designer.cs">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\MultilineInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\MultilineInput.Designer.cs">
+      <DependentUpon>MultilineInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\ProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\ProgressForm.Designer.cs">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\TextInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\TextInput.Designer.cs">
+      <DependentUpon>TextInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dialogs\WaitingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dialogs\WaitingForm.Designer.cs">
+      <DependentUpon>WaitingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="folderSync\ChooseDrive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="folderSync\ChooseDrive.Designer.cs">
+      <DependentUpon>ChooseDrive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="folderSync\ClientSync.cs" />
+    <Compile Include="folderSync\DriveSync.cs" />
+    <Compile Include="folderSync\FolderSync.cs" />
+    <Compile Include="folderSync\FolderSyncInterface.cs" />
+    <Compile Include="folderSync\OnlineChoose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="folderSync\OnlineChoose.Designer.cs">
+      <DependentUpon>OnlineChoose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="folderSync\OnlineSync.cs" />
+    <Compile Include="folderSync\ServerSync.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="news\NewsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="news\NewsForm.Designer.cs">
+      <DependentUpon>NewsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="packs\Pack.cs" />
+    <Compile Include="packs\PacksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="packs\PacksForm.Designer.cs">
+      <DependentUpon>PacksForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RevisionHub.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RevisionHub.Designer.cs">
+      <DependentUpon>RevisionHub.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="revision\assessments\Assess.cs" />
+    <Compile Include="revision\assessments\AssessForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revision\assessments\AssessForm.Designer.cs">
+      <DependentUpon>AssessForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\assessments\flashcards\Card.cs" />
+    <Compile Include="revision\assessments\flashcards\Flashcards.cs" />
+    <Compile Include="revision\assessments\flashcards\FlashcardsEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revision\assessments\flashcards\FlashcardsEditor.Designer.cs">
+      <DependentUpon>FlashcardsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\assessments\flashcards\FlashcardsSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="revision\assessments\flashcards\FlashcardsSettings.Designer.cs">
+      <DependentUpon>FlashcardsSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\assessments\flashcards\FlashcardTester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revision\assessments\flashcards\FlashcardTester.Designer.cs">
+      <DependentUpon>FlashcardTester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\assessments\tests\AskingQuestion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revision\assessments\tests\QPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="revision\assessments\tests\QPanel.Designer.cs">
+      <DependentUpon>QPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\assessments\tests\Question.cs" />
+    <Compile Include="revision\assessments\tests\QuestionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revision\assessments\tests\QuestionEditor.Designer.cs">
+      <DependentUpon>QuestionEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\assessments\tests\ResultsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revision\assessments\tests\ResultsForm.Designer.cs">
+      <DependentUpon>ResultsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\assessments\tests\Test.cs" />
+    <Compile Include="revision\assessments\tests\TestEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revision\assessments\tests\TestEditor.Designer.cs">
+      <DependentUpon>TestEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\assessments\tests\TestSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="revision\assessments\tests\TestSettings.Designer.cs">
+      <DependentUpon>TestSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\assessments\tests\TestTester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revision\assessments\tests\TestTester.Designer.cs">
+      <DependentUpon>TestTester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\documents\Document.cs" />
+    <Compile Include="revision\documents\DocumentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revision\documents\DocumentForm.Designer.cs">
+      <DependentUpon>DocumentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\explorer\MarathonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revision\explorer\MarathonForm.Designer.cs">
+      <DependentUpon>MarathonForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\explorer\panels\DocumentPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="revision\explorer\panels\DocumentPanel.Designer.cs">
+      <DependentUpon>DocumentPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\explorer\panels\FilePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="revision\explorer\panels\FilePanel.Designer.cs">
+      <DependentUpon>FilePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\explorer\panels\FlashcardsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="revision\explorer\panels\FlashcardsPanel.Designer.cs">
+      <DependentUpon>FlashcardsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\explorer\panels\FolderPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="revision\explorer\panels\FolderPanel.Designer.cs">
+      <DependentUpon>FolderPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\explorer\panels\ItemPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="revision\explorer\panels\ItemPanel.Designer.cs">
+      <DependentUpon>ItemPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\explorer\panels\TestPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="revision\explorer\panels\TestPanel.Designer.cs">
+      <DependentUpon>TestPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\explorer\RevisionExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="revision\explorer\RevisionExplorer.Designer.cs">
+      <DependentUpon>RevisionExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="revision\Revision.cs" />
+    <Compile Include="specialControls\ColourChangeButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="specialControls\ColourSpecificButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="specialControls\ColourSpecificLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="specialControls\ColourSpecificPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="specialControls\EditableLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="specialControls\SpecialTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="themes\ColourSpecific.cs" />
+    <Compile Include="themes\ModifyTheme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="themes\ModifyTheme.Designer.cs">
+      <DependentUpon>ModifyTheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="themes\Theme.cs" />
+    <Compile Include="themes\ThemeChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="themes\ThemeChange.Designer.cs">
+      <DependentUpon>ThemeChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tools\Notepad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tools\Notepad.Designer.cs">
+      <DependentUpon>Notepad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tools\TimerStopwatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tools\TimerStopwatch.Designer.cs">
+      <DependentUpon>TimerStopwatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateChecker.cs" />
+    <EmbeddedResource Include="about\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="alerts\AlertForm.resx">
+      <DependentUpon>AlertForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="alerts\ModifyAlert.resx">
+      <DependentUpon>ModifyAlert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\MsgBox.resx">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\MultilineInput.resx">
+      <DependentUpon>MultilineInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\ProgressForm.resx">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\TextInput.resx">
+      <DependentUpon>TextInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dialogs\WaitingForm.resx">
+      <DependentUpon>WaitingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="folderSync\ChooseDrive.resx">
+      <DependentUpon>ChooseDrive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="folderSync\OnlineChoose.resx">
+      <DependentUpon>OnlineChoose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="news\NewsForm.resx">
+      <DependentUpon>NewsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="packs\PacksForm.resx">
+      <DependentUpon>PacksForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RevisionHub.resx">
+      <DependentUpon>RevisionHub.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="revision\assessments\AssessForm.resx">
+      <DependentUpon>AssessForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\assessments\flashcards\FlashcardsEditor.resx">
+      <DependentUpon>FlashcardsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\assessments\flashcards\FlashcardsSettings.resx">
+      <DependentUpon>FlashcardsSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\assessments\flashcards\FlashcardTester.resx">
+      <DependentUpon>FlashcardTester.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\assessments\tests\QPanel.resx">
+      <DependentUpon>QPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\assessments\tests\QuestionEditor.resx">
+      <DependentUpon>QuestionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\assessments\tests\ResultsForm.resx">
+      <DependentUpon>ResultsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\assessments\tests\TestEditor.resx">
+      <DependentUpon>TestEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\assessments\tests\TestSettings.resx">
+      <DependentUpon>TestSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\assessments\tests\TestTester.resx">
+      <DependentUpon>TestTester.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\documents\DocumentForm.resx">
+      <DependentUpon>DocumentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\explorer\MarathonForm.resx">
+      <DependentUpon>MarathonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\explorer\panels\DocumentPanel.resx">
+      <DependentUpon>DocumentPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\explorer\panels\FilePanel.resx">
+      <DependentUpon>FilePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\explorer\panels\FolderPanel.resx">
+      <DependentUpon>FolderPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\explorer\panels\ItemPanel.resx">
+      <DependentUpon>ItemPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\explorer\RevisionExplorer.resx">
+      <DependentUpon>RevisionExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="themes\ModifyTheme.resx">
+      <DependentUpon>ModifyTheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="themes\ThemeChange.resx">
+      <DependentUpon>ThemeChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tools\Notepad.resx">
+      <DependentUpon>Notepad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tools\TimerStopwatch.resx">
+      <DependentUpon>TimerStopwatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\default dark.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Default_Dark" />
+    <None Include="Resources\revision program.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\information.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Beeping.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SmallExcl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Editing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exclamation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flashcards.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Document.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
