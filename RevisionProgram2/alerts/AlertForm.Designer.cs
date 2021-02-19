@@ -119,6 +119,7 @@
             this.Controls.Add(this.AlertsList);
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(374, 290);
             this.Name = "AlertForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reminders";

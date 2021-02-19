@@ -105,6 +105,7 @@ namespace RevisionProgram2.folderSync
             this.IPTxt.Name = "IPTxt";
             this.IPTxt.Size = new System.Drawing.Size(120, 25);
             this.IPTxt.TabIndex = 6;
+            this.IPTxt.TextChanged += new System.EventHandler(this.IPTxt_TextChanged);
             // 
             // PortNumeric
             // 
@@ -117,6 +118,7 @@ namespace RevisionProgram2.folderSync
             this.PortNumeric.Name = "PortNumeric";
             this.PortNumeric.Size = new System.Drawing.Size(120, 25);
             this.PortNumeric.TabIndex = 7;
+            this.PortNumeric.ValueChanged += new System.EventHandler(this.PortNumeric_ValueChanged);
             // 
             // SettingsGroup
             // 
@@ -144,7 +146,7 @@ namespace RevisionProgram2.folderSync
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "OnlineChoose";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Online Sync";
             this.Load += new System.EventHandler(this.OnlineChoose_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PortNumeric)).EndInit();

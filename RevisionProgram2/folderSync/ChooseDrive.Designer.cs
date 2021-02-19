@@ -119,7 +119,7 @@ namespace RevisionProgram2.folderSync
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ChooseDrive";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Choose Drive";
             this.Load += new System.EventHandler(this.ChooseDrive_Load);
             this.ResumeLayout(false);

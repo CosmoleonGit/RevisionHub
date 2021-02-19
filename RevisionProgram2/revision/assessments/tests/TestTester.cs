@@ -229,5 +229,10 @@ namespace RevisionProgram2.revision.assessments.tests
         {
             onFinish?.Invoke();
         }
+
+        private void QuestionLbl_TextChanged(object sender, EventArgs e)
+        {
+            QuestionLbl.ScaleFontToFit(6f, 16f);
+        }
     }
 }

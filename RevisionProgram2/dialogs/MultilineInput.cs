@@ -28,6 +28,8 @@ namespace RevisionProgram2.dialogs
         {
             var inputDialog = new MultilineInput();
 
+            inputDialog.StartPosition = FormStartPosition.CenterScreen;
+
             inputDialog.MessageLbl.Text = message;
             inputDialog.Text = title;
 

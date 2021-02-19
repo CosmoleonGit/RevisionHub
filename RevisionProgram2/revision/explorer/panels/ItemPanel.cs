@@ -117,9 +117,14 @@ namespace RevisionProgram2.revision.explorer.panels
 
         protected virtual void OnChange() { }
 
-        public virtual bool SuitsCondition(string s) => true;
+        public virtual bool SuitsCondition(string s)
+        {
+            return PanelName.ToLower().Contains(s.ToLower());
+        }
+
         public virtual void MoveItem(string s) { }
         protected virtual bool InEditingMode() => false;
         protected virtual Image GetIcon() => null;
+
     }
 }

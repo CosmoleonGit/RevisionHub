@@ -229,14 +229,14 @@ namespace RevisionProgram2.revision
         {
             SetNativeEnabled(false);
             BeginEditing(GetFullDir);
-            Flashcards.Create(GetFullDir,
+            Document.Create(GetFullDir,
                 () =>
                 {
                     SetNativeEnabled(true);
                 },
                 (n, d) =>
                 {
-                    if (n != "" && d == GetFullDir) AddPanel(new FlashcardsPanel(ListPanel, n, GetFullDir), true);
+                    if (n != "" && d == GetFullDir) AddPanel(new DocumentPanel(ListPanel, n, GetFullDir), true);
                     StopEditing(d);
                 });
         }
@@ -252,7 +252,7 @@ namespace RevisionProgram2.revision
 
         private void SearchTxt_TextChanged(object sender, EventArgs e)
         {
-            //if (searchTxt.Text == "") return;
+            ListPanel.VerticalScroll.Value = 0;
 
             int num = 0;
             foreach (ItemPanel panel in ListPanel.Controls)

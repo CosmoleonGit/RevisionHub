@@ -21,36 +21,40 @@ namespace RevisionProgram2.revision.documents
             path = _dir + "/" + _name;
         }
 
-        public static void Create(string dir, Action<string, string> onFinish)
+        public static void Create(string dir, Action onNameGet, Action<string, string> onFinish)
         {
-            // Take name input for flashcards.
-            string docName = TextInput.GetInputWait("Enter a name for your document.", "Document", "", s =>
+            // Take name input for the document.
+            TextInput.GetInput("Enter a name for your document.", "Document", docName =>
+            {
+                onNameGet();
+
+                if (docName == "")
+                {
+                    onFinish("", dir);
+                    return;
+                }
+
+                var editor = new DocumentForm(docName);
+
+                editor.onFinish = () =>
+                {
+                    if (editor.DialogResult == DialogResult.OK)
+                    {
+                        if (editor.Save(dir + "/" + docName))
+                            onFinish(docName, dir);
+                        else
+                            onFinish("", dir);
+                    }
+                    else
+                        onFinish("", dir);
+
+                };
+
+                editor.Show();
+            }, "", s =>
             {
                 return TextInput.dirNameValid(s) && !Helper.Exists(dir + s);
             });
-
-            if (docName == "")
-            {
-                onFinish("", dir);
-                return;
-            }
-            
-            var editor = new DocumentForm(docName);
-
-            editor.onFinish = () =>
-            {
-                if (editor.DialogResult == DialogResult.OK)
-                {
-                    if (editor.Save(dir + "/" + docName))
-                        onFinish(docName, dir);
-                    else
-                        onFinish("", dir);
-                } else
-                    onFinish("", dir);
-
-            };
-
-            editor.Show();
         }
 
         public override void Start(Action onFinish = null)

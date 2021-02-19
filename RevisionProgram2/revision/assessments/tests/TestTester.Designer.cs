@@ -37,8 +37,8 @@
             this.NextBtn = new System.Windows.Forms.Button();
             this.CorrectLbl = new RevisionProgram2.specialControls.ColourSpecificLabel();
             this.AnswersLbl = new System.Windows.Forms.Label();
-            this.QuestionLbl = new RevisionProgram2.specialControls.ColourSpecificLabel();
             this.NumLbl = new System.Windows.Forms.Label();
+            this.QuestionLbl = new RevisionProgram2.specialControls.ColourSpecificLabel();
             this.TypedPanel.SuspendLayout();
             this.CorrectPanel.SuspendLayout();
             this.SuspendLayout();
@@ -150,18 +150,6 @@
             this.AnswersLbl.TabIndex = 9;
             this.AnswersLbl.Text = "Correct answer:";
             // 
-            // QuestionLbl
-            // 
-            this.QuestionLbl.BackColourName = "QuestionBackcolour";
-            this.QuestionLbl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.QuestionLbl.ForeColourName = "QuestionForecolour";
-            this.QuestionLbl.Location = new System.Drawing.Point(0, 72);
-            this.QuestionLbl.Name = "QuestionLbl";
-            this.QuestionLbl.Size = new System.Drawing.Size(446, 153);
-            this.QuestionLbl.TabIndex = 2;
-            this.QuestionLbl.Text = "(Question)";
-            this.QuestionLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // NumLbl
             // 
             this.NumLbl.Dock = System.Windows.Forms.DockStyle.Top;
@@ -171,6 +159,20 @@
             this.NumLbl.TabIndex = 1;
             this.NumLbl.Text = "Question 0 of 0";
             this.NumLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // QuestionLbl
+            // 
+            this.QuestionLbl.BackColourName = "QuestionBackcolour";
+            this.QuestionLbl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.QuestionLbl.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuestionLbl.ForeColourName = "QuestionForecolour";
+            this.QuestionLbl.Location = new System.Drawing.Point(0, 72);
+            this.QuestionLbl.Name = "QuestionLbl";
+            this.QuestionLbl.Size = new System.Drawing.Size(446, 153);
+            this.QuestionLbl.TabIndex = 2;
+            this.QuestionLbl.Text = "(Question)";
+            this.QuestionLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.QuestionLbl.TextChanged += new System.EventHandler(this.QuestionLbl_TextChanged);
             // 
             // TestTester
             // 

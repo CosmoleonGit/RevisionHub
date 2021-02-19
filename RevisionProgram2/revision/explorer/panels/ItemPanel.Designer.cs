@@ -39,6 +39,8 @@ namespace RevisionProgram2.revision.explorer.panels
             // 
             // NameLink
             // 
+            this.NameLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.NameLink.AutoEllipsis = true;
             this.NameLink.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NameLink.Location = new System.Drawing.Point(42, 16);

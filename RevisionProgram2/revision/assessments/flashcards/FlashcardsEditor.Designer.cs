@@ -33,25 +33,29 @@
             this.AddBtn = new System.Windows.Forms.Button();
             this.OKBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
-            this.RightBtn = new System.Windows.Forms.Button();
-            this.LeftBtn = new System.Windows.Forms.Button();
-            this.CurrentLbl = new System.Windows.Forms.Label();
             this.DescGroup = new System.Windows.Forms.GroupBox();
+            this.DescTxt = new RevisionProgram2.specialControls.SpecialTextBox();
             this.LShiftBtn = new System.Windows.Forms.Button();
             this.RShiftBtn = new System.Windows.Forms.Button();
-            this.LeftMostBtn = new System.Windows.Forms.Button();
-            this.RightMostBtn = new System.Windows.Forms.Button();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.DuplicateBtn = new System.Windows.Forms.Button();
             this.BottomPanel = new System.Windows.Forms.Panel();
-            this.MiddlePanel = new System.Windows.Forms.Panel();
+            this.MainPanel = new System.Windows.Forms.Panel();
             this.Side2Btn = new RevisionProgram2.specialControls.ColourSpecificButton();
             this.Side1Btn = new RevisionProgram2.specialControls.ColourSpecificButton();
-            this.DescTxt = new RevisionProgram2.specialControls.SpecialTextBox();
+            this.CardInfoPanel = new System.Windows.Forms.Panel();
+            this.LeftMostBtn = new System.Windows.Forms.Button();
+            this.CurrentLbl = new System.Windows.Forms.Label();
+            this.LeftBtn = new System.Windows.Forms.Button();
+            this.RightBtn = new System.Windows.Forms.Button();
+            this.RightMostBtn = new System.Windows.Forms.Button();
+            this.RightPanel = new System.Windows.Forms.Panel();
             this.DescGroup.SuspendLayout();
             this.TopPanel.SuspendLayout();
             this.BottomPanel.SuspendLayout();
-            this.MiddlePanel.SuspendLayout();
+            this.MainPanel.SuspendLayout();
+            this.CardInfoPanel.SuspendLayout();
+            this.RightPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // DescBtn
@@ -129,50 +133,12 @@
             this.CancelBtn.UseVisualStyleBackColor = false;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
-            // RightBtn
-            // 
-            this.RightBtn.BackColor = System.Drawing.Color.LightGray;
-            this.RightBtn.Enabled = false;
-            this.RightBtn.FlatAppearance.BorderSize = 0;
-            this.RightBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RightBtn.Location = new System.Drawing.Point(174, 45);
-            this.RightBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.RightBtn.Name = "RightBtn";
-            this.RightBtn.Size = new System.Drawing.Size(75, 38);
-            this.RightBtn.TabIndex = 12;
-            this.RightBtn.Text = ">";
-            this.RightBtn.UseVisualStyleBackColor = false;
-            this.RightBtn.Click += new System.EventHandler(this.RightBtn_Click);
-            // 
-            // LeftBtn
-            // 
-            this.LeftBtn.BackColor = System.Drawing.Color.LightGray;
-            this.LeftBtn.Enabled = false;
-            this.LeftBtn.FlatAppearance.BorderSize = 0;
-            this.LeftBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LeftBtn.Location = new System.Drawing.Point(87, 45);
-            this.LeftBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.LeftBtn.Name = "LeftBtn";
-            this.LeftBtn.Size = new System.Drawing.Size(75, 38);
-            this.LeftBtn.TabIndex = 11;
-            this.LeftBtn.Text = "<";
-            this.LeftBtn.UseVisualStyleBackColor = false;
-            this.LeftBtn.Click += new System.EventHandler(this.LeftBtn_Click);
-            // 
-            // CurrentLbl
-            // 
-            this.CurrentLbl.Location = new System.Drawing.Point(19, 20);
-            this.CurrentLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.CurrentLbl.Name = "CurrentLbl";
-            this.CurrentLbl.Size = new System.Drawing.Size(298, 21);
-            this.CurrentLbl.TabIndex = 9;
-            this.CurrentLbl.Text = "Card 1 of 1";
-            this.CurrentLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // DescGroup
             // 
+            this.DescGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.DescGroup.Controls.Add(this.DescTxt);
-            this.DescGroup.Location = new System.Drawing.Point(636, 20);
+            this.DescGroup.Location = new System.Drawing.Point(4, 4);
             this.DescGroup.Margin = new System.Windows.Forms.Padding(4);
             this.DescGroup.Name = "DescGroup";
             this.DescGroup.Padding = new System.Windows.Forms.Padding(4);
@@ -180,7 +146,20 @@
             this.DescGroup.TabIndex = 19;
             this.DescGroup.TabStop = false;
             this.DescGroup.Text = "Description";
-            this.DescGroup.Visible = false;
+            // 
+            // DescTxt
+            // 
+            this.DescTxt.AllowSpecialCharacters = false;
+            this.DescTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DescTxt.Location = new System.Drawing.Point(9, 34);
+            this.DescTxt.Margin = new System.Windows.Forms.Padding(4);
+            this.DescTxt.Multiline = true;
+            this.DescTxt.Name = "DescTxt";
+            this.DescTxt.Size = new System.Drawing.Size(280, 480);
+            this.DescTxt.TabIndex = 0;
+            this.DescTxt.TextChanged += new System.EventHandler(this.DescTxt_TextChanged);
             // 
             // LShiftBtn
             // 
@@ -210,43 +189,14 @@
             this.RShiftBtn.UseVisualStyleBackColor = false;
             this.RShiftBtn.Click += new System.EventHandler(this.RShiftBtn_Click);
             // 
-            // LeftMostBtn
-            // 
-            this.LeftMostBtn.BackColor = System.Drawing.Color.LightGray;
-            this.LeftMostBtn.Enabled = false;
-            this.LeftMostBtn.FlatAppearance.BorderSize = 0;
-            this.LeftMostBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LeftMostBtn.Location = new System.Drawing.Point(19, 45);
-            this.LeftMostBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.LeftMostBtn.Name = "LeftMostBtn";
-            this.LeftMostBtn.Size = new System.Drawing.Size(60, 38);
-            this.LeftMostBtn.TabIndex = 10;
-            this.LeftMostBtn.Text = "|<<";
-            this.LeftMostBtn.UseVisualStyleBackColor = false;
-            this.LeftMostBtn.Click += new System.EventHandler(this.LeftMostBtn_Click);
-            // 
-            // RightMostBtn
-            // 
-            this.RightMostBtn.BackColor = System.Drawing.Color.LightGray;
-            this.RightMostBtn.Enabled = false;
-            this.RightMostBtn.FlatAppearance.BorderSize = 0;
-            this.RightMostBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RightMostBtn.Location = new System.Drawing.Point(257, 45);
-            this.RightMostBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.RightMostBtn.Name = "RightMostBtn";
-            this.RightMostBtn.Size = new System.Drawing.Size(60, 38);
-            this.RightMostBtn.TabIndex = 13;
-            this.RightMostBtn.Text = ">>|";
-            this.RightMostBtn.UseVisualStyleBackColor = false;
-            this.RightMostBtn.Click += new System.EventHandler(this.RightMostBtn_Click);
-            // 
             // TopPanel
             // 
+            this.TopPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TopPanel.Controls.Add(this.DuplicateBtn);
             this.TopPanel.Controls.Add(this.AddBtn);
             this.TopPanel.Controls.Add(this.DeleteBtn);
             this.TopPanel.Controls.Add(this.DescBtn);
-            this.TopPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPanel.Location = new System.Drawing.Point(0, 0);
             this.TopPanel.Margin = new System.Windows.Forms.Padding(4);
             this.TopPanel.Name = "TopPanel";
@@ -269,30 +219,32 @@
             // 
             // BottomPanel
             // 
+            this.BottomPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.BottomPanel.Controls.Add(this.CancelBtn);
             this.BottomPanel.Controls.Add(this.OKBtn);
             this.BottomPanel.Controls.Add(this.LShiftBtn);
             this.BottomPanel.Controls.Add(this.RShiftBtn);
-            this.BottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.BottomPanel.Location = new System.Drawing.Point(0, 490);
             this.BottomPanel.Margin = new System.Windows.Forms.Padding(4);
             this.BottomPanel.Name = "BottomPanel";
             this.BottomPanel.Size = new System.Drawing.Size(636, 76);
             this.BottomPanel.TabIndex = 14;
             // 
-            // MiddlePanel
+            // MainPanel
             // 
-            this.MiddlePanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.MiddlePanel.Controls.Add(this.LeftMostBtn);
-            this.MiddlePanel.Controls.Add(this.CurrentLbl);
-            this.MiddlePanel.Controls.Add(this.LeftBtn);
-            this.MiddlePanel.Controls.Add(this.RightBtn);
-            this.MiddlePanel.Controls.Add(this.RightMostBtn);
-            this.MiddlePanel.Location = new System.Drawing.Point(150, 380);
-            this.MiddlePanel.Margin = new System.Windows.Forms.Padding(4);
-            this.MiddlePanel.Name = "MiddlePanel";
-            this.MiddlePanel.Size = new System.Drawing.Size(336, 102);
-            this.MiddlePanel.TabIndex = 8;
+            this.MainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.MainPanel.Controls.Add(this.Side2Btn);
+            this.MainPanel.Controls.Add(this.BottomPanel);
+            this.MainPanel.Controls.Add(this.TopPanel);
+            this.MainPanel.Controls.Add(this.Side1Btn);
+            this.MainPanel.Controls.Add(this.CardInfoPanel);
+            this.MainPanel.Location = new System.Drawing.Point(0, 0);
+            this.MainPanel.Name = "MainPanel";
+            this.MainPanel.Size = new System.Drawing.Size(636, 566);
+            this.MainPanel.TabIndex = 20;
+            this.MainPanel.SizeChanged += new System.EventHandler(this.MiddlePanel_SizeChanged);
             // 
             // Side2Btn
             // 
@@ -305,10 +257,10 @@
             this.Side2Btn.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Side2Btn.ForeColourName = "CardRightFore";
             this.Side2Btn.GlobalBackColour = System.Drawing.Color.Empty;
-            this.Side2Btn.Location = new System.Drawing.Point(324, 85);
+            this.Side2Btn.Location = new System.Drawing.Point(321, 84);
             this.Side2Btn.Name = "Side2Btn";
-            this.Side2Btn.Size = new System.Drawing.Size(300, 283);
-            this.Side2Btn.TabIndex = 7;
+            this.Side2Btn.Size = new System.Drawing.Size(303, 283);
+            this.Side2Btn.TabIndex = 10;
             this.Side2Btn.Text = "Side 2";
             this.Side2Btn.UseVisualStyleBackColor = false;
             this.Side2Btn.SizeChanged += new System.EventHandler(this.Side2Btn_SizeChanged);
@@ -326,42 +278,119 @@
             this.Side1Btn.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Side1Btn.ForeColourName = "CardLeftFore";
             this.Side1Btn.GlobalBackColour = System.Drawing.Color.Empty;
-            this.Side1Btn.Location = new System.Drawing.Point(12, 85);
+            this.Side1Btn.Location = new System.Drawing.Point(12, 84);
             this.Side1Btn.Name = "Side1Btn";
-            this.Side1Btn.Size = new System.Drawing.Size(300, 283);
-            this.Side1Btn.TabIndex = 5;
+            this.Side1Btn.Size = new System.Drawing.Size(303, 283);
+            this.Side1Btn.TabIndex = 9;
             this.Side1Btn.Text = "Side 1";
             this.Side1Btn.UseVisualStyleBackColor = false;
             this.Side1Btn.SizeChanged += new System.EventHandler(this.Side1Btn_SizeChanged);
             this.Side1Btn.TextChanged += new System.EventHandler(this.Side1Btn_TextChanged);
             this.Side1Btn.Click += new System.EventHandler(this.Side1Btn_Click);
             // 
-            // DescTxt
+            // CardInfoPanel
             // 
-            this.DescTxt.AllowSpecialCharacters = false;
-            this.DescTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.CardInfoPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.CardInfoPanel.Controls.Add(this.LeftMostBtn);
+            this.CardInfoPanel.Controls.Add(this.CurrentLbl);
+            this.CardInfoPanel.Controls.Add(this.LeftBtn);
+            this.CardInfoPanel.Controls.Add(this.RightBtn);
+            this.CardInfoPanel.Controls.Add(this.RightMostBtn);
+            this.CardInfoPanel.Location = new System.Drawing.Point(150, 379);
+            this.CardInfoPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.CardInfoPanel.Name = "CardInfoPanel";
+            this.CardInfoPanel.Size = new System.Drawing.Size(336, 102);
+            this.CardInfoPanel.TabIndex = 11;
+            // 
+            // LeftMostBtn
+            // 
+            this.LeftMostBtn.BackColor = System.Drawing.Color.LightGray;
+            this.LeftMostBtn.Enabled = false;
+            this.LeftMostBtn.FlatAppearance.BorderSize = 0;
+            this.LeftMostBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LeftMostBtn.Location = new System.Drawing.Point(19, 45);
+            this.LeftMostBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.LeftMostBtn.Name = "LeftMostBtn";
+            this.LeftMostBtn.Size = new System.Drawing.Size(60, 38);
+            this.LeftMostBtn.TabIndex = 10;
+            this.LeftMostBtn.Text = "|<<";
+            this.LeftMostBtn.UseVisualStyleBackColor = false;
+            this.LeftMostBtn.Click += new System.EventHandler(this.LeftMostBtn_Click);
+            // 
+            // CurrentLbl
+            // 
+            this.CurrentLbl.Location = new System.Drawing.Point(19, 20);
+            this.CurrentLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.CurrentLbl.Name = "CurrentLbl";
+            this.CurrentLbl.Size = new System.Drawing.Size(298, 21);
+            this.CurrentLbl.TabIndex = 9;
+            this.CurrentLbl.Text = "Card 1 of 1";
+            this.CurrentLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LeftBtn
+            // 
+            this.LeftBtn.BackColor = System.Drawing.Color.LightGray;
+            this.LeftBtn.Enabled = false;
+            this.LeftBtn.FlatAppearance.BorderSize = 0;
+            this.LeftBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LeftBtn.Location = new System.Drawing.Point(87, 45);
+            this.LeftBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.LeftBtn.Name = "LeftBtn";
+            this.LeftBtn.Size = new System.Drawing.Size(75, 38);
+            this.LeftBtn.TabIndex = 11;
+            this.LeftBtn.Text = "<";
+            this.LeftBtn.UseVisualStyleBackColor = false;
+            this.LeftBtn.Click += new System.EventHandler(this.LeftBtn_Click);
+            // 
+            // RightBtn
+            // 
+            this.RightBtn.BackColor = System.Drawing.Color.LightGray;
+            this.RightBtn.Enabled = false;
+            this.RightBtn.FlatAppearance.BorderSize = 0;
+            this.RightBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RightBtn.Location = new System.Drawing.Point(174, 45);
+            this.RightBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.RightBtn.Name = "RightBtn";
+            this.RightBtn.Size = new System.Drawing.Size(75, 38);
+            this.RightBtn.TabIndex = 12;
+            this.RightBtn.Text = ">";
+            this.RightBtn.UseVisualStyleBackColor = false;
+            this.RightBtn.Click += new System.EventHandler(this.RightBtn_Click);
+            // 
+            // RightMostBtn
+            // 
+            this.RightMostBtn.BackColor = System.Drawing.Color.LightGray;
+            this.RightMostBtn.Enabled = false;
+            this.RightMostBtn.FlatAppearance.BorderSize = 0;
+            this.RightMostBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RightMostBtn.Location = new System.Drawing.Point(257, 45);
+            this.RightMostBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.RightMostBtn.Name = "RightMostBtn";
+            this.RightMostBtn.Size = new System.Drawing.Size(60, 38);
+            this.RightMostBtn.TabIndex = 13;
+            this.RightMostBtn.Text = ">>|";
+            this.RightMostBtn.UseVisualStyleBackColor = false;
+            this.RightMostBtn.Click += new System.EventHandler(this.RightMostBtn_Click);
+            // 
+            // RightPanel
+            // 
+            this.RightPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.DescTxt.Location = new System.Drawing.Point(9, 34);
-            this.DescTxt.Margin = new System.Windows.Forms.Padding(4);
-            this.DescTxt.Multiline = true;
-            this.DescTxt.Name = "DescTxt";
-            this.DescTxt.Size = new System.Drawing.Size(280, 480);
-            this.DescTxt.TabIndex = 0;
-            this.DescTxt.TextChanged += new System.EventHandler(this.DescTxt_TextChanged);
+            this.RightPanel.Controls.Add(this.DescGroup);
+            this.RightPanel.Location = new System.Drawing.Point(635, 0);
+            this.RightPanel.Name = "RightPanel";
+            this.RightPanel.Size = new System.Drawing.Size(308, 566);
+            this.RightPanel.TabIndex = 21;
+            this.RightPanel.Visible = false;
             // 
             // FlashcardsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelBtn;
-            this.ClientSize = new System.Drawing.Size(636, 566);
-            this.Controls.Add(this.Side2Btn);
-            this.Controls.Add(this.Side1Btn);
-            this.Controls.Add(this.MiddlePanel);
-            this.Controls.Add(this.BottomPanel);
-            this.Controls.Add(this.TopPanel);
-            this.Controls.Add(this.DescGroup);
+            this.ClientSize = new System.Drawing.Size(943, 566);
+            this.Controls.Add(this.RightPanel);
+            this.Controls.Add(this.MainPanel);
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -377,7 +406,9 @@
             this.DescGroup.PerformLayout();
             this.TopPanel.ResumeLayout(false);
             this.BottomPanel.ResumeLayout(false);
-            this.MiddlePanel.ResumeLayout(false);
+            this.MainPanel.ResumeLayout(false);
+            this.CardInfoPanel.ResumeLayout(false);
+            this.RightPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -389,20 +420,22 @@
         internal System.Windows.Forms.Button AddBtn;
         internal System.Windows.Forms.Button OKBtn;
         internal System.Windows.Forms.Button CancelBtn;
-        internal System.Windows.Forms.Button RightBtn;
-        internal System.Windows.Forms.Button LeftBtn;
-        internal System.Windows.Forms.Label CurrentLbl;
         internal System.Windows.Forms.GroupBox DescGroup;
         private specialControls.SpecialTextBox DescTxt;
         internal System.Windows.Forms.Button LShiftBtn;
         internal System.Windows.Forms.Button RShiftBtn;
-        internal System.Windows.Forms.Button LeftMostBtn;
-        internal System.Windows.Forms.Button RightMostBtn;
         private System.Windows.Forms.Panel TopPanel;
         private System.Windows.Forms.Panel BottomPanel;
-        private System.Windows.Forms.Panel MiddlePanel;
         internal System.Windows.Forms.Button DuplicateBtn;
-        private specialControls.ColourSpecificButton Side1Btn;
+        private System.Windows.Forms.Panel MainPanel;
         private specialControls.ColourSpecificButton Side2Btn;
+        private specialControls.ColourSpecificButton Side1Btn;
+        private System.Windows.Forms.Panel CardInfoPanel;
+        internal System.Windows.Forms.Button LeftMostBtn;
+        internal System.Windows.Forms.Label CurrentLbl;
+        internal System.Windows.Forms.Button LeftBtn;
+        internal System.Windows.Forms.Button RightBtn;
+        internal System.Windows.Forms.Button RightMostBtn;
+        private System.Windows.Forms.Panel RightPanel;
     }
 }

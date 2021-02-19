@@ -174,6 +174,7 @@
             this.Controls.Add(this.ThemesList);
             this.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimumSize = new System.Drawing.Size(445, 351);
             this.Name = "ThemeChange";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Theme Change";

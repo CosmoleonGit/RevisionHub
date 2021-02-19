@@ -70,7 +70,7 @@
             this.Controls.Add(this.NotesTabs);
             this.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(300, 300);
+            this.MinimumSize = new System.Drawing.Size(300, 378);
             this.Name = "Notepad";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Notepad";

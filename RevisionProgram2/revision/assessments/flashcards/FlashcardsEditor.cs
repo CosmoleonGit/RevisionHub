@@ -56,7 +56,6 @@ namespace RevisionProgram2.revision.assessments.flashcards
         int currentID;
         private void SwitchTo(int newID)
         {
-            //if (newID < 0 || newID >= cards.Count) return;
             currentID = newID;
 
             Side1Btn.Text = cards[newID].side1;
@@ -115,9 +114,25 @@ namespace RevisionProgram2.revision.assessments.flashcards
 
         private void DescBtn_Click(object sender, EventArgs e)
         {
-            DescBtn.Text = "Description " + (DescGroup.Visible ? ">>>" : "<<<");
-            DescGroup.Visible ^= true;
-            Width = PreferredSize.Width + 9;
+            DescBtn.Text = "Description " + (RightPanel.Visible ? ">>>" : "<<<");
+            
+            RightPanel.Visible ^= true;
+
+            if (RightPanel.Visible)
+            {
+                MinimumSize += new Size(RightPanel.Width, 0);
+            }
+            else
+            {
+                MinimumSize -= new Size(RightPanel.Width, 0);
+            }
+
+            Width = MainPanel.Width + (RightPanel.Visible ? (RightPanel.Width + 16) : 0);
+
+            if (RightPanel.Visible)
+                MainPanel.Width = RightPanel.Left;
+            else
+                MainPanel.Width = ClientSize.Width;
         }
 
         private void RefreshInfo()
@@ -177,6 +192,9 @@ namespace RevisionProgram2.revision.assessments.flashcards
         {
             Theme.ChangeFormTheme(this);
             Icon = Properties.Resources.Revision_Program;
+            Width = MainPanel.Width;
+
+            CenterToScreen();
 
             if (cards.Count == 0)
             {
@@ -322,12 +340,13 @@ namespace RevisionProgram2.revision.assessments.flashcards
 
         private void FlashcardsEditor_SizeChanged(object sender, EventArgs e)
         {
-            int w = (int)((float)(Width - 24 - 12) / 2);
-
-            Side1Btn.Width = w;
-            Side2Btn.Width = w;
-
-            Side2Btn.Left = Width / 2 + 6;
+            if (RightPanel.Visible)
+            {
+                MainPanel.Width = RightPanel.Left;
+            } else
+            {
+                MainPanel.Width = ClientSize.Width;
+            }
         }
 
         private void Side1Btn_SizeChanged(object sender, EventArgs e)
@@ -338,6 +357,16 @@ namespace RevisionProgram2.revision.assessments.flashcards
         private void Side2Btn_SizeChanged(object sender, EventArgs e)
         {
             Side2Btn.ScaleFontToFit(4, 14.25f);
+        }
+
+        private void MiddlePanel_SizeChanged(object sender, EventArgs e)
+        {
+            int w = MainPanel.ClientSize.Width / 2 - 15;
+
+            Side1Btn.Width = w;
+            Side2Btn.Width = w;
+
+            Side2Btn.Left = MainPanel.Right - Side2Btn.Width - 12;
         }
     }
 }

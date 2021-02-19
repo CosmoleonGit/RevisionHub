@@ -269,7 +269,7 @@
             this.Controls.Add(this.ListPanel);
             this.Controls.Add(this.PathLbl);
             this.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.MinimumSize = new System.Drawing.Size(400, 448);
+            this.MinimumSize = new System.Drawing.Size(448, 448);
             this.Name = "RevisionExplorer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Revision Explorer";

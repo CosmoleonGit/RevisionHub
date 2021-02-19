@@ -41,6 +41,8 @@ namespace RevisionProgram2.folderSync
                 IPLbl.Enabled = true;
                 IPTxt.Enabled = true;
             }
+
+            CheckValid();
         }
 
         private void JoinRadio_CheckedChanged(object sender, EventArgs e)
@@ -50,6 +52,23 @@ namespace RevisionProgram2.folderSync
                 IPLbl.Enabled = false;
                 IPTxt.Enabled = false;
             }
+
+            CheckValid();
+        }
+
+        private void IPTxt_TextChanged(object sender, EventArgs e)
+        {
+            CheckValid();
+        }
+
+        private void PortNumeric_ValueChanged(object sender, EventArgs e)
+        {
+            CheckValid();
+        }
+
+        void CheckValid()
+        {
+            ConnectBtn.Enabled = HostRadio.Checked || IPTxt.Text != "";
         }
     }
 }
