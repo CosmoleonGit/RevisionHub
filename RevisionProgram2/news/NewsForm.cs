@@ -30,7 +30,7 @@ namespace RevisionProgram2.news
 
             string news = null;
 
-            WaitingForm.BeginWait("Downloading notices...", () =>
+            WaitingForm.BeginWait("Downloading notices...", ev =>
             {
                 try
                 {

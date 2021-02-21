@@ -42,7 +42,7 @@ namespace RevisionProgram2.revision.assessments.tests
                     break;
             }
 
-            SkipBox.Enabled = Properties.Settings.Default.testSkippable;
+            SkipBox.Checked = Properties.Settings.Default.testSkippable;
 
         }
 

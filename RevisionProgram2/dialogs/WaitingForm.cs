@@ -13,24 +13,26 @@ namespace RevisionProgram2.dialogs
 {
     public partial class WaitingForm : Form
     {
-        public WaitingForm(string message, Action _action, Action _onFinish = null)
+        public WaitingForm(string message, Action<DoWorkEventArgs> _action, Action _onFinish = null, Func<bool> _onCancel = null)
         {
             InitializeComponent();
 
             MessageLbl.Text = message;
             action = _action;
             onFinish = _onFinish;
+            onCancel = _onCancel;
         }
 
-        readonly Action action, onFinish;
-
+        readonly Action<DoWorkEventArgs> action;
+        readonly Action onFinish;
+        readonly Func<bool> onCancel;
+        
         bool isClosing;
         private void ProcessWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            action();
+            action(e);
             isClosing = true;
             onFinish?.Invoke();
-            Invoke(new Action(() => { Close(); }));
         }
 
         private void WaitingForm_Load(object sender, EventArgs e)
@@ -40,16 +42,16 @@ namespace RevisionProgram2.dialogs
             ProcessWorker.RunWorkerAsync();
         }
 
-        public static void Begin(string message, Action work, Action onFinish)
+        public static void Begin(string message, Action<DoWorkEventArgs> work, Action onFinish, Func<bool> onCancel = null)
         {
-            var waitingForm = new WaitingForm(message, work, onFinish);
+            var waitingForm = new WaitingForm(message, work, onFinish, onCancel);
 
             waitingForm.Show();
         }
 
-        public static void BeginWait(string message, Action work, Action onFinish = null)
+        public static void BeginWait(string message, Action<DoWorkEventArgs> work, Func<bool> onCancel = null)
         {
-            var waitingForm = new WaitingForm(message, work, onFinish);
+            var waitingForm = new WaitingForm(message, work, null, onCancel);
 
             waitingForm.ShowDialog();
         }
@@ -57,7 +59,21 @@ namespace RevisionProgram2.dialogs
         private void WaitingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing && !isClosing)
-                e.Cancel = true;
+            {
+                ProcessWorker.CancelAsync();
+
+                if (onCancel != null)
+                {
+                    MessageLbl.Text = "Cancelling...";
+                    e.Cancel = !onCancel();
+                }
+                else e.Cancel = true;
+            }
+        }
+
+        private void ProcessWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Close();
         }
     }
 }

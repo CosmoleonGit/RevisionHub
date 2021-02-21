@@ -79,7 +79,7 @@ namespace RevisionProgram2.packs
             // Download the pack from GitHub.
             bool worked = false;
 
-            WaitingForm.BeginWait("Downloading and extracting pack...", () =>
+            WaitingForm.BeginWait("Downloading and extracting pack...", ev =>
             {
                 try
                 {

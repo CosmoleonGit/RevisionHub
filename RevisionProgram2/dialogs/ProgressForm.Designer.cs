@@ -57,6 +57,7 @@ namespace RevisionProgram2.dialogs
             // ProcessWorker
             // 
             this.ProcessWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ProcessWorker_DoWork);
+            this.ProcessWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.ProcessWorker_RunWorkerCompleted);
             // 
             // ProgressForm
             // 

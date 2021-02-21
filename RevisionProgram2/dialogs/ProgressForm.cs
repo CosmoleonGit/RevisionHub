@@ -32,7 +32,6 @@ namespace RevisionProgram2.dialogs
         {
             action(progress);
             isClosing = true;
-            Invoke(new Action(() => { Close(); }));
         }
 
         private void ProgressForm_Load(object sender, EventArgs e)
@@ -65,6 +64,11 @@ namespace RevisionProgram2.dialogs
         {
             if (e.CloseReason == CloseReason.UserClosing && !isClosing)
                 e.Cancel = true;
+        }
+
+        private void ProcessWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Close();
         }
     }
 }

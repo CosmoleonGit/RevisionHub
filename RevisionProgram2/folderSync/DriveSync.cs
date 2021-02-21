@@ -37,14 +37,24 @@ namespace RevisionProgram2.folderSync
 
         readonly string externalDirectory;
 
-        public override void PullFile(string filePath)
+        public override bool PullFile(string filePath)
         {
-            File.Copy($"{externalDirectory}{filePath}", $"{Helper.LocalDirectory}{filePath}");
+            try
+            {
+                File.Copy($"{externalDirectory}{filePath}", $"{Helper.LocalDirectory}{filePath}");
+                return true;
+            } catch { return false; }
+            
         }
 
-        public override void PushFile(string filePath)
+        public override bool PushFile(string filePath)
         {
-            File.Copy($"{Helper.LocalDirectory}{filePath}", $"{externalDirectory}{filePath}");
+            try
+            {
+                File.Copy($"{Helper.LocalDirectory}{filePath}", $"{externalDirectory}{filePath}");
+                return true;
+            } catch { return false; }
+            
         }
 
         public override Queue<string> FilesToPush(IProgress<float> progress) =>
@@ -74,26 +84,6 @@ namespace RevisionProgram2.folderSync
             }
 
             return queue;
-
-            /*
-            var queue = new Queue<string>();
-
-            var di = new DirectoryInfo(from);
-
-            foreach (var file in di.GetFiles("*", SearchOption.AllDirectories))
-            {
-                string filePath = file.FullName.Remove(0, from.Length);
-
-                string writePath = $"{to}{filePath}";
-                if (!File.Exists(writePath))
-                {
-                    Directory.CreateDirectory(Path.GetDirectoryName(writePath));
-                    queue.Enqueue(filePath);
-                }
-            }
-
-            return queue;
-            */
         }
     }
 }

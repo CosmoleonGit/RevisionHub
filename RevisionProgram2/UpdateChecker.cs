@@ -30,7 +30,7 @@ namespace RevisionProgram2
 
             string newVer = null;
 
-            WaitingForm.BeginWait("Checking for updates...", () =>
+            WaitingForm.BeginWait("Checking for updates...", ev =>
             {
                 try
                 {

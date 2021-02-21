@@ -14,8 +14,8 @@ namespace RevisionProgram2.folderSync
         public virtual bool PushFirst => true;
         public abstract Queue<string> FilesToPush(IProgress<float> progress);
         public abstract Queue<string> FilesToPull(IProgress<float> progress);
-        public abstract void PushFile(string to);
-        public abstract void PullFile(string from);
+        public abstract bool PushFile(string to);
+        public abstract bool PullFile(string from);
 
         public Queue<string> AllFilesQueue(string from)
         {

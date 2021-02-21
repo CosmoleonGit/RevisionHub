@@ -18,7 +18,7 @@ namespace RevisionProgram2.packs
             Directory.CreateDirectory(Helper.directory + "temp");
 
             bool worked = false;
-            WaitingForm.BeginWait("Downloading pack data...", () =>
+            WaitingForm.BeginWait("Downloading pack data...", ev =>
             {
                 try
                 {

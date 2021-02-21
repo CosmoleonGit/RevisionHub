@@ -34,7 +34,9 @@
             // 
             // ProcessWorker
             // 
+            this.ProcessWorker.WorkerSupportsCancellation = true;
             this.ProcessWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ProcessWorker_DoWork);
+            this.ProcessWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.ProcessWorker_RunWorkerCompleted);
             // 
             // MessageLbl
             // 

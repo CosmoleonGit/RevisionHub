@@ -1,4 +1,6 @@
-﻿using RevisionProgram2.dialogs;
+﻿#define OFFLINE
+
+using RevisionProgram2.dialogs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,11 +29,10 @@ namespace RevisionProgram2.folderSync
             port = _port;
         }
 
-        const int timeout = 10000;
-
         public override bool Setup()
         {
-            WaitingForm.BeginWait("Connecting to host...", () => 
+            bool closed = false;
+            WaitingForm.BeginWait("Connecting to host...", ev => 
             {
                 while (!client.Connected)
                 {
@@ -40,32 +41,37 @@ namespace RevisionProgram2.folderSync
                         client.Connect(ip, port);
                     } catch
                     {
-                        if (MsgBox.ShowWait($"Could not connect to server." +
-                                        $"{Helper.twoLines}" +
-                                        $"Would you like to try again?",
-                                        "Connection timeout.",
-                                        MsgBox.Options.yesNo,
-                                        MsgBox.MsgIcon.ERROR) == "No")
+                        if (closed || !ConnectionFailure())
                         {
                             break;
                         }
                     }
                 }
+            }, () =>
+            {
+                closed = true;
+                client.Close();
+                return true;
             });
-
-            if (!client.Connected) return false;
+            
+            if (closed || !client.Connected) return false;
 
             socket = client.Client;
             stream = client.GetStream();
 
+            stream.ReadTimeout = timeout;
+
             return true;
         }
+
         public override void Finish()
         {
             base.Finish();
             client.Close();
         }
 
-        protected override string WriteDirectory => "C:/Users/Compaq/Desktop/Client Test/";
+#if OFFLINE && DEBUG
+        protected override string WriteDirectory => $"C:/Users/{Environment.UserName}/Desktop/Client Test/";
+#endif
     }
 }

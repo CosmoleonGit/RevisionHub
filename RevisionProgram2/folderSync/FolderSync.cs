@@ -21,98 +21,97 @@ namespace RevisionProgram2.folderSync
             Queue<string> filePushQueue = null;
             Queue<string> filePullQueue = null;
 
-            void QueuePushes()
+            bool QueuePushes()
             {
-                try
+                bool success = false;
+                ProgressForm.BeginWait("Queueing file pushes...", progress =>
                 {
-                    ProgressForm.BeginWait("Queueing file pushes...", progress =>
-                    {
-                        filePushQueue = fsi.FilesToPush(progress);
-                    });
-                } catch (Exception e)
-                {
-                    Helper.Error("Failed to sync files.", e.Message);
-                }
+                    success = (filePushQueue = fsi.FilesToPush(progress)) != null;
+                });
+                return success;
             };
 
-            void QueuePulls()
+            bool QueuePulls()
             {
-                try
+                bool success = false;
+                ProgressForm.BeginWait("Queueing file pulls...", progress =>
                 {
-                    ProgressForm.BeginWait("Queueing file pulls...", progress =>
-                    {
-                        filePullQueue = fsi.FilesToPull(progress);
-                    });
-                } catch (Exception e)
-                {
-                    Helper.Error("Failed to sync files.", e.Message);
-                }
+                    success = (filePullQueue = fsi.FilesToPull(progress)) != null;
+                });
+                return success;
             }
 
-            void PushFiles()
+            bool PushFiles()
             {
+                bool success = true;
                 ProgressForm.BeginWait("Pushing files...", progress =>
                 {
-                    try
+                    int amount = filePushQueue.Count;
+                    for (int i = 0; i < amount; i++)
                     {
-                        int amount = filePushQueue.Count;
-                        for (int i = 0; i < amount; i++)
-                        {
-                            fsi.PushFile(filePushQueue.Dequeue());
+                        if (fsi.PushFile(filePushQueue.Dequeue()))
                             progress.Report((float)i / amount);
+                        else
+                        {
+                            success = false;
+                            break;
                         }
                     }
-                    catch (Exception e)
-                    {
-                        Helper.Error("Failed to copy file.", e.Message);
-                    }
                 });
+                return success;
             }
 
-            void PullFiles()
+            bool PullFiles()
             {
+                bool success = true;
                 ProgressForm.BeginWait("Pulling files...", progress =>
                 {
-                    try
+                    int amount = filePullQueue.Count;
+                    for (int i = 0; i < amount; i++)
                     {
-                        int amount = filePullQueue.Count;
-                        for (int i = 0; i < amount; i++)
-                        {
-                            fsi.PullFile(filePullQueue.Dequeue());
+                        if (fsi.PullFile(filePullQueue.Dequeue()))
                             progress.Report((float)i / amount);
+                        else
+                        {
+                            success = false;
+                            break;
                         }
                     }
-                    catch (Exception e)
-                    {
-                        Helper.Error("Failed to copy file.", e.Message);
-                    }
                 });
+                return success;
             };
 
             if (fsi.PushFirst)
             {
-                QueuePushes();
-                QueuePulls();
+                if (!QueuePushes()) goto error;
+                if (!QueuePulls())  goto error;
             } else
             {
-                QueuePulls();
-                QueuePushes();
+                if (!QueuePulls())  goto error;
+                if (!QueuePushes()) goto error;
             }
 
             if (fsi.PushFirst)
             {
-                PushFiles();
-                PullFiles();
+                if (!PushFiles()) goto error;
+                if (!PullFiles()) goto error;
             }
             else
             {
-                PullFiles();
-                PushFiles();
+                if (!PullFiles()) goto error;
+                if (!PushFiles()) goto error;
             }
 
             fsi.Finish();
 
             MsgBox.ShowWait("Successfully synchronized all files.", "Sync", null, MsgBox.MsgIcon.TICK);
+            return;
+
+        error:
+            fsi.Finish();
+
+            MsgBox.ShowWait("File sync was not completed successfully.", "Sync", null, MsgBox.MsgIcon.EXCL);
+            return;
         }
     }
 }
