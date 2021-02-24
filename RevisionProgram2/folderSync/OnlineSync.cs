@@ -27,8 +27,8 @@ namespace RevisionProgram2.folderSync
 
         public override void Finish()
         {
-            socket.Close();
-            stream.Close();
+            socket?.Close();
+            stream?.Close();
         }
 
         protected bool WaitForResponse()
@@ -154,7 +154,7 @@ namespace RevisionProgram2.folderSync
             }
         }
 
-        const int bufferSize = 1024;
+        protected const int bufferSize = 8192;
 
         public override bool PushFile(string from)
         {

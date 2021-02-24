@@ -39,5 +39,19 @@ namespace RevisionProgram2.revision.explorer.panels
                 GetForm.StopEditing($"{Dir}{PanelName}");
             });
         }
+
+        public override void Duplicate()
+        {
+            GetForm.BeginEditing(Dir);
+            GetForm.SetNativeEnabled(false);
+
+            Flashcards.Duplicate(PanelName, Dir, 
+                () => GetForm.SetNativeEnabled(true),
+                (n, d) =>
+                {
+                    GetForm.StopEditing(Dir);
+                    if (n != "" && d == Dir) GetForm.AddPanel(new FlashcardsPanel(owner, n, Dir), true);
+                });
+        }
     }
 }

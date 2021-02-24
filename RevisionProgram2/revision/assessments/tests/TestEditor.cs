@@ -118,6 +118,7 @@ namespace RevisionProgram2.revision.assessments.tests
             questionEditor.FormClosing += (s, e) =>
             {
                 SetNativeEnabled(true);
+                Focus();
 
                 if (questionEditor.DialogResult == DialogResult.OK)
                 {

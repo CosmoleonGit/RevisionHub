@@ -182,24 +182,28 @@ namespace RevisionProgram2.Themes
 
         private void RenameBtn_Click(object sender, EventArgs e)
         {
+            SetNativeEnabled(false);
             // Prompts the user for a new name.
-            string themeName = TextInput.GetInputWait(
-                "Enter a name for your theme.",
-                "New Theme",
-                ThemesList.SelectedItem.ToString(),
-                TextInput.dirNameValid);
+            TextInput.GetInput("Enter a name for your theme.",
+                               "New Theme",
+                               themeName =>
+                               {
+                                   SetNativeEnabled(true);
 
-            // Check if the new name isn't empty and is not the previous one.
-            if (themeName == "" || themeName == ThemesList.SelectedItem.ToString()) return;
+                                   // Check if the new name isn't empty and is not the previous one.
+                                   if (themeName == "" || themeName == ThemesList.SelectedItem.ToString()) return;
 
-            try
-            {
-                Theme.RenameTheme((ushort)ThemesList.SelectedIndex, themeName);
-                ThemesList.Items[ThemesList.SelectedIndex] = themeName;
-            } catch (Exception ex)
-            {
-                Helper.Error("Error renaming file.", $"Reason: {ex.Message}");
-            }
+                                   try
+                                   {
+                                       Theme.RenameTheme((ushort)ThemesList.SelectedIndex, themeName);
+                                       ThemesList.Items[ThemesList.SelectedIndex] = themeName;
+                                   }
+                                   catch (Exception ex)
+                                   {
+                                       Helper.Error("Error renaming file.", $"Reason: {ex.Message}");
+                                   }
+                               }, ThemesList.SelectedItem.ToString(),
+                               TextInput.dirNameValid);
         }
     }
 }

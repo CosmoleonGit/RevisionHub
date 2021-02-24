@@ -13,7 +13,7 @@ namespace RevisionProgram2.folderSync
     {
         public static void Sync(FolderSyncInterface fsi)
         {
-            if (!fsi.Setup()) return;
+            if (!fsi.Setup()) goto error;
 
             var dir = $"{Helper.directory}Revision/";
             var di = new DirectoryInfo(dir);

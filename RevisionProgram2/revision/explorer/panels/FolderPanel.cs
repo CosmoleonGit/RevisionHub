@@ -52,24 +52,30 @@ namespace RevisionProgram2.revision.explorer.panels
 
         private void RenameStrip_Click(object sender, EventArgs e)
         {
-            string newName = TextInput.GetInputWait("Enter a new name for your folder.",
-                                                        "Rename",
-                                                        PanelName,
-                                                        x => TextInput.dirNameValid(x) && !Directory.Exists(Dir + x));
+            GetForm.SetNativeEnabled(false);
 
-            if (newName != "")
-            {
-                try
-                {
-                    Directory.Move(Dir + PanelName, Dir + newName);
+            TextInput.GetInput("Enter a new name for your folder.",
+                               "Rename",
+                               newName =>
+                               {
+                                   GetForm.SetNativeEnabled(true);
 
-                    ChangeName(newName);
-                }
-                catch (Exception ex)
-                {
-                    Helper.Error("Error renaming file.", $"Reason: {ex.Message}");
-                }
-            }
+                                   if (newName != "")
+                                   {
+                                       try
+                                       {
+                                           Directory.Move(Dir + PanelName, Dir + newName);
+
+                                           ChangeName(newName);
+                                       }
+                                       catch (Exception ex)
+                                       {
+                                           Helper.Error("Error renaming file.", $"Reason: {ex.Message}");
+                                       }
+                                   }
+                               },
+                               PanelName,
+                               x => TextInput.dirNameValid(x) && !Directory.Exists(Dir + x));
         }
 
         protected override void OnChange()

@@ -28,7 +28,19 @@ namespace RevisionProgram2.folderSync
         {
             socketConnected.Reset();
             
-            server.Start();
+            try
+            {
+                server.Start();
+            } catch (SocketException)
+            {
+                MsgBox.ShowWait("Failed to start server. Is there already a server listening on that port?",
+                                "Error",
+                                null,
+                                MsgBox.MsgIcon.ERROR);
+
+                return false;
+            }
+            
             
             WaitingForm.BeginWait("Waiting for client to connect...", ev =>
             {
@@ -44,6 +56,8 @@ namespace RevisionProgram2.folderSync
                         {
                             client = server.AcceptTcpClient();
                             socket = client.Client;
+                            socket.SendBufferSize = bufferSize;
+                            socket.ReceiveBufferSize = bufferSize;
                             stream = client.GetStream();
                             stream.ReadTimeout = timeout;
 

@@ -322,37 +322,42 @@ namespace RevisionProgram2.revision.tests
             editor.Show();
         }
 
-        public static void Duplicate(string from, string dir, Action<string, string> onFinish)
+        public static void Duplicate(string from, string dir, Action onNameGet, Action<string, string> onFinish)
         {
-            string name = TextInput.GetInputWait("Enter a name for your test.", "Test", "", s =>
+            TextInput.GetInput("Enter a name for your test.", "Test", name =>
+            {
+                onNameGet();
+
+                // Cancels if they didn't input anything.
+                if (name == "")
+                {
+                    onFinish("", dir);
+                    return;
+                }
+
+                var test = new Test(from, dir);
+
+                if (!test.TryLoadQuestions())
+                {
+                    return;
+                }
+
+                var editor = new TestEditor(name, test.description, test.questions);
+
+                editor.onFinish = () =>
+                {
+                    editor.Save(dir + "/" + name);
+
+                    onFinish(name, dir);
+                };
+
+                editor.Show();
+            }, "", s =>
             {
                 return TextInput.dirNameValid(s) && !Helper.Exists(dir + s);
             });
 
-            // Cancels if they didn't input anything.
-            if (name == "")
-            {
-                onFinish("", dir);
-                return;
-            }
-
-            var test = new Test(from, dir);
-
-            if (!test.TryLoadQuestions())
-            {
-                return;
-            }
-
-            var editor = new TestEditor(name, test.description, test.questions);
-
-            editor.onFinish = () =>
-            {
-                editor.Save(dir + "/" + name);
-
-                onFinish(name, dir);
-            };
-
-            editor.Show();
+            
         }
     }
 }

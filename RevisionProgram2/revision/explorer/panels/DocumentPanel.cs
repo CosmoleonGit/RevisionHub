@@ -69,28 +69,34 @@ namespace RevisionProgram2.revision.explorer.panels
 
         private void RenameStrip_Click(object sender, EventArgs e)
         {
-            string newName = TextInput.GetInputWait("Enter a new name for your file.",
-                        "Rename",
-                        PanelName,
-                        x => TextInput.dirNameValid(x) && !Exists(Dir + x));
+            GetForm.SetNativeEnabled(false);
 
-            if (newName != "")
-            {
-                try
-                {
-                    File.Move(Dir + PanelName,
-                              Dir + newName);
+            TextInput.GetInput("Enter a new name for your file.",
+                               "Rename",
+                               newName =>
+                               {
+                                   GetForm.SetNativeEnabled(true);
 
-                    ChangeName(newName);
-                }
-                catch (Exception ex)
-                {
-                    MsgBox.ShowWait("Error renaming file." + Helper.twoLines + "Reason: " + ex.Message,
-                        "Error",
-                        MsgBox.Options.ok,
-                        MsgBox.MsgIcon.ERROR);
-                }
-            }
+                                   if (newName != "")
+                                   {
+                                       try
+                                       {
+                                           File.Move(Dir + PanelName,
+                                                     Dir + newName);
+
+                                           ChangeName(newName);
+                                       }
+                                       catch (Exception ex)
+                                       {
+                                           MsgBox.ShowWait("Error renaming file." + Helper.twoLines + "Reason: " + ex.Message,
+                                               "Error",
+                                               MsgBox.Options.ok,
+                                               MsgBox.MsgIcon.ERROR);
+                                       }
+                                   }
+                               },
+                               PanelName,
+                               x => TextInput.dirNameValid(x) && !Exists(Dir + x));
         }
 
         protected override bool InEditingMode()
@@ -101,6 +107,20 @@ namespace RevisionProgram2.revision.explorer.panels
         protected override void EditingChanges(bool editing)
         {
             Enabled = !editing;
+        }
+
+        private void DuplicateStrip_Click(object sender, EventArgs e)
+        {
+            GetForm.BeginEditing(Dir);
+            GetForm.SetNativeEnabled(false);
+
+            Document.Duplicate(PanelName, Dir,
+                () => GetForm.SetNativeEnabled(true),
+                (n, d) =>
+                {
+                    GetForm.StopEditing(Dir);
+                    if (n != "" && d == Dir) GetForm.AddPanel(new DocumentPanel(owner, n, Dir), true);
+                });
         }
     }
 }

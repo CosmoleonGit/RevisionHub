@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,8 +15,31 @@ using static RevisionProgram2.revision.tests.Test;
 
 namespace RevisionProgram2.revision.assessments.tests
 {
-    internal partial class QuestionEditor : Form
+    public partial class QuestionEditor : Form
     {
+        #region Simulate Show Dialog
+
+        const int GWL_STYLE = -16;
+        const int WS_DISABLED = 0x08000000;
+
+        [DllImport("user32.dll")]
+        static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        public bool IsEnabled { get; private set; } = true;
+
+        internal void SetNativeEnabled(bool enabled)
+        {
+            IsEnabled = enabled;
+
+            SetWindowLong(Handle, GWL_STYLE, GetWindowLong(Handle, GWL_STYLE) &
+                ~WS_DISABLED | (enabled ? 0 : WS_DISABLED));
+        }
+
+        #endregion
+
         readonly Predicate<string> checkQuestion;
         public QuestionEditor(Question question = null, Predicate<string> _checkQuestion = null)
         {
@@ -59,33 +83,46 @@ namespace RevisionProgram2.revision.assessments.tests
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            string newAns = TextInput.GetInputWait("Enter a possible answer for this question",
-                                                   "Answer", 
-                                                   "", 
-                                                   (string s) => { return !AnswerList.Items.Contains(s); }, 
-                                                   true).Trim();
-        
-            if (newAns != "")
-            {
-                AnswerList.Items.Add(newAns);
-                CheckValid();
-                SetCombo();
-            }
+            SetNativeEnabled(false);
+
+            TextInput.GetInput("Enter a possible answer for this question",
+                               "Answer",
+                               newAns =>
+                               {
+                                   SetNativeEnabled(true);
+
+                                   newAns = newAns.Trim();
+
+                                   if (newAns != null)
+                                   {
+                                       AnswerList.Items.Add(newAns);
+                                       CheckValid();
+                                       SetCombo();
+                                   }
+                               }, "",
+                               (string s) => { return !AnswerList.Items.Contains(s); },
+                               true);
         }
 
         private void EditBtn_Click(object sender, EventArgs e)
         {
-            string newAns = TextInput.GetInputWait("Enter a possible answer for this question",
-                                                   "Answer",
-                                                   AnswerList.SelectedItem.ToString(),
-                                                   (string s) => { return !AnswerList.Items.Contains(s); }, 
-                                                   true).Trim();
+            SetNativeEnabled(false);
 
-            if (newAns != "")
-            {
-                AnswerList.Items[AnswerList.SelectedIndex] = newAns;
-                SetCombo();
-            }
+            TextInput.GetInput("Enter a possible answer for this question",
+                               "Answer",
+                               newAns =>
+                               {
+                                   SetNativeEnabled(true);
+
+                                   newAns = newAns.Trim();
+
+                                   if (newAns != "")
+                                   {
+                                       AnswerList.Items[AnswerList.SelectedIndex] = newAns;
+                                       SetCombo();
+                                   }
+                               }, AnswerList.SelectedItem.ToString(),
+                               (string s) => { return !AnswerList.Items.Contains(s); });
         }
 
         private void DeleteBtn_Click(object sender, EventArgs e)

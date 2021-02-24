@@ -34,6 +34,7 @@ namespace RevisionProgram2.revision.explorer.panels
             this.MoveStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.RenameStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.DuplicateStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.OptionsContext.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,9 +43,10 @@ namespace RevisionProgram2.revision.explorer.panels
             this.OptionsContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MoveStrip,
             this.DeleteStrip,
+            this.DuplicateStrip,
             this.RenameStrip});
             this.OptionsContext.Name = "OptionsContext";
-            this.OptionsContext.Size = new System.Drawing.Size(181, 92);
+            this.OptionsContext.Size = new System.Drawing.Size(181, 114);
             // 
             // MoveStrip
             // 
@@ -67,6 +69,13 @@ namespace RevisionProgram2.revision.explorer.panels
             this.RenameStrip.Text = "Rename";
             this.RenameStrip.Click += new System.EventHandler(this.RenameStrip_Click);
             // 
+            // DuplicateStrip
+            // 
+            this.DuplicateStrip.Name = "DuplicateStrip";
+            this.DuplicateStrip.Size = new System.Drawing.Size(180, 22);
+            this.DuplicateStrip.Text = "Duplicate";
+            this.DuplicateStrip.Click += new System.EventHandler(this.DuplicateStrip_Click);
+            // 
             // DocumentPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -74,7 +83,6 @@ namespace RevisionProgram2.revision.explorer.panels
             this.Name = "DocumentPanel";
             this.OptionsContext.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -84,5 +92,6 @@ namespace RevisionProgram2.revision.explorer.panels
         private System.Windows.Forms.ToolStripMenuItem MoveStrip;
         private System.Windows.Forms.ToolStripMenuItem DeleteStrip;
         private System.Windows.Forms.ToolStripMenuItem RenameStrip;
+        private System.Windows.Forms.ToolStripMenuItem DuplicateStrip;
     }
 }

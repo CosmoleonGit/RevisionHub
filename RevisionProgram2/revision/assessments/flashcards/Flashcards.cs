@@ -82,9 +82,41 @@ namespace RevisionProgram2.revision.flashcards
             editor.Show();
         }
 
-        public static void Duplicate(string from, string dir, Action<string, string> onFinish)
+        public static void Duplicate(string from, string dir, Action onNameGet, Action<string, string> onFinish)
         {
-            
+            TextInput.GetInput("Enter a name for your flashcards.", "Flashcards", name =>
+            {
+                onNameGet();
+
+                if (name == "")
+                {
+                    onFinish("", dir);
+                    return;
+                }
+
+                var flashcards = new Flashcards(from, dir);
+
+                if (!flashcards.TryLoadCards())
+                {
+                    return;
+                }
+
+                var editor = new FlashcardsEditor(from, flashcards.description, flashcards.cards);
+
+                editor.onFinish = () =>
+                {
+                    if (editor.Save($"{dir}/{name}"))
+                    {
+                        onFinish(name, dir);
+                    }
+                };
+
+                editor.Show();
+
+            }, "", s =>
+            {
+                return TextInput.dirNameValid(s) && !Helper.Exists(dir + s);
+            });
         }
 
         public Flashcards(string _name, string _dir) : base(_name, _dir) { }

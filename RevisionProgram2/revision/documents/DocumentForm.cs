@@ -36,7 +36,6 @@ namespace RevisionProgram2.revision.documents
         {
             DialogResult = DialogResult.OK;
             closing = true;
-            onFinish?.Invoke();
             Close();
         }
 

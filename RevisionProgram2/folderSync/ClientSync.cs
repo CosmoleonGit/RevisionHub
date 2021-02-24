@@ -3,6 +3,7 @@
 using RevisionProgram2.dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -39,8 +40,9 @@ namespace RevisionProgram2.folderSync
                     try
                     {
                         client.Connect(ip, port);
-                    } catch
+                    } catch (SocketException se)
                     {
+                        Debug.WriteLine(se.Message);
                         if (closed || !ConnectionFailure())
                         {
                             break;
@@ -57,6 +59,8 @@ namespace RevisionProgram2.folderSync
             if (closed || !client.Connected) return false;
 
             socket = client.Client;
+            socket.SendBufferSize = bufferSize;
+            socket.ReceiveBufferSize = bufferSize;
             stream = client.GetStream();
 
             stream.ReadTimeout = timeout;

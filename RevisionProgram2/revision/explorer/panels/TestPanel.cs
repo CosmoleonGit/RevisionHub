@@ -45,12 +45,15 @@ namespace RevisionProgram2.revision.explorer.panels
         public override void Duplicate()
         {
             GetForm.BeginEditing(Dir);
+            GetForm.SetNativeEnabled(false);
 
-            Test.Duplicate(PanelName, Dir, (n, d) =>
-            {
-                GetForm.StopEditing(Dir);
-                if (n != "" && d == Dir) GetForm.AddPanel(new TestPanel(owner, n, Dir), true);
-            });
+            Test.Duplicate(PanelName, Dir,
+                () => GetForm.SetNativeEnabled(true),
+                (n, d) =>
+                {
+                    GetForm.StopEditing(Dir);
+                    if (n != "" && d == Dir) GetForm.AddPanel(new TestPanel(owner, n, Dir), true);
+                });
         }
     }
 }

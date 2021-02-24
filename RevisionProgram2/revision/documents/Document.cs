@@ -45,7 +45,7 @@ namespace RevisionProgram2.revision.documents
                         else
                             onFinish("", dir);
                     }
-                    else
+                    else 
                         onFinish("", dir);
 
                 };
@@ -74,6 +74,44 @@ namespace RevisionProgram2.revision.documents
                 docForm.Show();
             }
             
+        }
+
+        public static void Duplicate(string from, string dir, Action onNameGet, Action<string, string> onFinish)
+        {
+            TextInput.GetInput("Enter a name for your document.", "Document", docName =>
+            {
+                onNameGet();
+
+                if (docName == "")
+                {
+                    onFinish("", dir);
+                    return;
+                }
+
+                var document = new Document(from, dir);
+                if (!document.TryLoadText()) return;
+
+                var editor = new DocumentForm(docName, document.text);
+
+                editor.onFinish = () =>
+                {
+                    if (editor.DialogResult == DialogResult.OK)
+                    {
+                        if (editor.Save(dir + "/" + docName))
+                            onFinish(docName, dir);
+                        else
+                            onFinish("", dir);
+                    }
+                    else
+                        onFinish("", dir);
+
+                };
+
+                editor.Show();
+            }, "", s =>
+            {
+                return TextInput.dirNameValid(s) && !Helper.Exists(dir + s);
+            });
         }
 
         string text;

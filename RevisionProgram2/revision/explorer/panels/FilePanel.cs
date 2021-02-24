@@ -84,25 +84,31 @@ namespace RevisionProgram2.revision.explorer.panels
 
         private void RenameStrip_Click(object sender, EventArgs e)
         {
-            string newName = TextInput.GetInputWait("Enter a new name for your file.",
-                        "Rename",
-                        PanelName,
-                        x => TextInput.dirNameValid(x) && !Exists(Dir + x));
+            GetForm.SetNativeEnabled(false);
 
-            if (newName != "")
-            {
-                try
-                {
-                    File.Move(Dir + PanelName,
-                              Dir + newName);
+            TextInput.GetInput("Enter a new name for your file.",
+                               "Rename",
+                               newName =>
+                               {
+                                   GetForm.SetNativeEnabled(true);
 
-                    ChangeName(newName);
-                }
-                catch (Exception ex)
-                {
-                    Helper.Error("Error renaming file.", $"Reason: {ex.Message}");
-                }
-            }
+                                   if (newName != "")
+                                   {
+                                       try
+                                       {
+                                           File.Move(Dir + PanelName,
+                                                     Dir + newName);
+
+                                           ChangeName(newName);
+                                       }
+                                       catch (Exception ex)
+                                       {
+                                           Helper.Error("Error renaming file.", ex.Message);
+                                       }
+                                   }
+                               },
+                               PanelName,
+                               x => TextInput.dirNameValid(x) && !Exists(Dir + x));
         }
 
         private void DuplicateStrip_Click(object sender, EventArgs e)
