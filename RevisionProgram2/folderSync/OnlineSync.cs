@@ -69,12 +69,9 @@ namespace RevisionProgram2.folderSync
 
         protected virtual string WriteDirectory => Helper.LocalDirectory;
 
-        void TimeoutError()
+        void SyncError(string reason)
         {
-            MsgBox.ShowWait("A connection timeout was reached.",
-                            "Timeout",
-                            MsgBox.Options.ok,
-                            MsgBox.MsgIcon.ERROR);
+            Helper.Error("An error occured during online sync.", reason);
         }
 
         public override Queue<string> FilesToPush(IProgress<float> progress)
@@ -105,9 +102,9 @@ namespace RevisionProgram2.folderSync
                 SendString("E");
 
                 return queue;
-            } catch (IOException)
+            } catch (IOException ex)
             {
-                TimeoutError();
+                SyncError(ex.Message);
                 return null;
             }
         }
@@ -147,9 +144,9 @@ namespace RevisionProgram2.folderSync
                 }
 
                 return queue;
-            } catch (IOException)
+            } catch (IOException ex)
             {
-                TimeoutError();
+                SyncError(ex.Message);
                 return null;
             }
         }
@@ -179,9 +176,9 @@ namespace RevisionProgram2.folderSync
                     }
 
                     stream.WriteByte(1);
-                } catch (IOException)
+                } catch (IOException ex)
                 {
-                    TimeoutError();
+                    SyncError(ex.Message);
                     return false;
                 }
                 
@@ -217,10 +214,10 @@ namespace RevisionProgram2.folderSync
                         stream.WriteByte(0);
                     }
                 }
-            } catch (IOException)
+            } catch (IOException ex)
             {
                 File.Delete(writeDir);
-                TimeoutError();
+                SyncError(ex.Message);
                 return false;
             }
 
