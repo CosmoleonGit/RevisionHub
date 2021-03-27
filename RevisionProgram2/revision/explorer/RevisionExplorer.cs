@@ -343,7 +343,7 @@ namespace RevisionProgram2.revision
                     list.Add(c as FilePanel);
                 }
             }
-
+            
             SetNativeEnabled(false);
 
             var mf = new MarathonForm(list.ToArray());

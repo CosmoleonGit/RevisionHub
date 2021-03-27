@@ -167,17 +167,34 @@
     <Compile Include="folderSync\OnlineSync.cs" />
     <Compile Include="folderSync\ServerSync.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="news\NewsForm.cs">
+    <Compile Include="onlineFeatures\netRoom\ChatRoom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="news\NewsForm.Designer.cs">
+    <Compile Include="onlineFeatures\netRoom\ChatRoom.Designer.cs">
+      <DependentUpon>ChatRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="onlineFeatures\netRoom\ClientMember.cs" />
+    <Compile Include="onlineFeatures\netRoom\NetRoomClient.cs" />
+    <Compile Include="onlineFeatures\netRoom\NetRoomPeer.cs" />
+    <Compile Include="onlineFeatures\netRoom\NetRoomServer.cs" />
+    <Compile Include="onlineFeatures\netRoom\ServerWait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="onlineFeatures\netRoom\ServerWait.Designer.cs">
+      <DependentUpon>ServerWait.cs</DependentUpon>
+    </Compile>
+    <Compile Include="onlineFeatures\news\NewsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="onlineFeatures\news\NewsForm.Designer.cs">
       <DependentUpon>NewsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="packs\Pack.cs" />
-    <Compile Include="packs\PacksForm.cs">
+    <Compile Include="onlineFeatures\StreamExtensions.cs" />
+    <Compile Include="onlineFeatures\packs\Pack.cs" />
+    <Compile Include="onlineFeatures\packs\PacksForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="packs\PacksForm.Designer.cs">
+    <Compile Include="onlineFeatures\packs\PacksForm.Designer.cs">
       <DependentUpon>PacksForm.cs</DependentUpon>
     </Compile>
     <Compile Include="RevisionHub.cs">
@@ -387,10 +404,16 @@
     <EmbeddedResource Include="folderSync\OnlineChoose.resx">
       <DependentUpon>OnlineChoose.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="news\NewsForm.resx">
+    <EmbeddedResource Include="onlineFeatures\netRoom\ChatRoom.resx">
+      <DependentUpon>ChatRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="onlineFeatures\netRoom\ServerWait.resx">
+      <DependentUpon>ServerWait.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="onlineFeatures\news\NewsForm.resx">
       <DependentUpon>NewsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="packs\PacksForm.resx">
+    <EmbeddedResource Include="onlineFeatures\packs\PacksForm.resx">
       <DependentUpon>PacksForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RevisionHub.resx">

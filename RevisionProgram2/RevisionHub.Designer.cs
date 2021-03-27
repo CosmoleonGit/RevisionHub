@@ -46,6 +46,7 @@
             this.SyncGroup = new System.Windows.Forms.GroupBox();
             this.SyncOnlineBtn = new System.Windows.Forms.Button();
             this.SyncDriveBtn = new System.Windows.Forms.Button();
+            this.FriendRoomBtn = new System.Windows.Forms.Button();
             this.GeneralGroup.SuspendLayout();
             this.ToolsGroup.SuspendLayout();
             this.ThemesGroup.SuspendLayout();
@@ -83,9 +84,9 @@
             // 
             this.ToolsGroup.Controls.Add(this.TimerBtn);
             this.ToolsGroup.Controls.Add(this.NotepadBtn);
-            this.ToolsGroup.Location = new System.Drawing.Point(14, 88);
+            this.ToolsGroup.Location = new System.Drawing.Point(14, 97);
             this.ToolsGroup.Name = "ToolsGroup";
-            this.ToolsGroup.Size = new System.Drawing.Size(247, 103);
+            this.ToolsGroup.Size = new System.Drawing.Size(247, 102);
             this.ToolsGroup.TabIndex = 1;
             this.ToolsGroup.TabStop = false;
             this.ToolsGroup.Text = "Tools";
@@ -96,7 +97,7 @@
             this.TimerBtn.FlatAppearance.BorderSize = 0;
             this.TimerBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.TimerBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimerBtn.Location = new System.Drawing.Point(7, 66);
+            this.TimerBtn.Location = new System.Drawing.Point(7, 65);
             this.TimerBtn.Name = "TimerBtn";
             this.TimerBtn.Size = new System.Drawing.Size(233, 31);
             this.TimerBtn.TabIndex = 5;
@@ -121,7 +122,7 @@
             // ThemesGroup
             // 
             this.ThemesGroup.Controls.Add(this.ThemesBtn);
-            this.ThemesGroup.Location = new System.Drawing.Point(14, 201);
+            this.ThemesGroup.Location = new System.Drawing.Point(14, 205);
             this.ThemesGroup.Name = "ThemesGroup";
             this.ThemesGroup.Size = new System.Drawing.Size(247, 66);
             this.ThemesGroup.TabIndex = 4;
@@ -145,7 +146,7 @@
             // AlertsGroup
             // 
             this.AlertsGroup.Controls.Add(this.AlertsBtn);
-            this.AlertsGroup.Location = new System.Drawing.Point(14, 273);
+            this.AlertsGroup.Location = new System.Drawing.Point(14, 303);
             this.AlertsGroup.Name = "AlertsGroup";
             this.AlertsGroup.Size = new System.Drawing.Size(247, 66);
             this.AlertsGroup.TabIndex = 5;
@@ -169,7 +170,7 @@
             // aboutGroup
             // 
             this.aboutGroup.Controls.Add(this.aboutBtn);
-            this.aboutGroup.Location = new System.Drawing.Point(267, 273);
+            this.aboutGroup.Location = new System.Drawing.Point(267, 303);
             this.aboutGroup.Name = "aboutGroup";
             this.aboutGroup.Size = new System.Drawing.Size(247, 66);
             this.aboutGroup.TabIndex = 6;
@@ -192,12 +193,13 @@
             // 
             // OnlineGroup
             // 
+            this.OnlineGroup.Controls.Add(this.FriendRoomBtn);
             this.OnlineGroup.Controls.Add(this.UpdatesBtn);
             this.OnlineGroup.Controls.Add(this.PacksBtn);
             this.OnlineGroup.Controls.Add(this.NoticesBtn);
             this.OnlineGroup.Location = new System.Drawing.Point(267, 125);
             this.OnlineGroup.Name = "OnlineGroup";
-            this.OnlineGroup.Size = new System.Drawing.Size(247, 135);
+            this.OnlineGroup.Size = new System.Drawing.Size(247, 172);
             this.OnlineGroup.TabIndex = 6;
             this.OnlineGroup.TabStop = false;
             this.OnlineGroup.Text = "Online Features";
@@ -283,11 +285,25 @@
             this.SyncDriveBtn.UseVisualStyleBackColor = false;
             this.SyncDriveBtn.Click += new System.EventHandler(this.SyncDriveBtn_Click);
             // 
+            // FriendRoomBtn
+            // 
+            this.FriendRoomBtn.BackColor = System.Drawing.Color.LightGray;
+            this.FriendRoomBtn.FlatAppearance.BorderSize = 0;
+            this.FriendRoomBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FriendRoomBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FriendRoomBtn.Location = new System.Drawing.Point(7, 135);
+            this.FriendRoomBtn.Name = "FriendRoomBtn";
+            this.FriendRoomBtn.Size = new System.Drawing.Size(233, 31);
+            this.FriendRoomBtn.TabIndex = 6;
+            this.FriendRoomBtn.Text = "Friend Room";
+            this.FriendRoomBtn.UseVisualStyleBackColor = false;
+            this.FriendRoomBtn.Click += new System.EventHandler(this.FriendRoomBtn_Click);
+            // 
             // RevisionHub
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(526, 351);
+            this.ClientSize = new System.Drawing.Size(526, 381);
             this.Controls.Add(this.SyncGroup);
             this.Controls.Add(this.OnlineGroup);
             this.Controls.Add(this.aboutGroup);
@@ -336,6 +352,7 @@
         private System.Windows.Forms.GroupBox SyncGroup;
         private System.Windows.Forms.Button SyncDriveBtn;
         private System.Windows.Forms.Button SyncOnlineBtn;
+        private System.Windows.Forms.Button FriendRoomBtn;
     }
 }
 

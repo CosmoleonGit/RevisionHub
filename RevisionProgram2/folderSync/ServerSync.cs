@@ -22,12 +22,8 @@ namespace RevisionProgram2.folderSync
             server = new TcpListener(IPAddress.Any, port);
         }
 
-        ManualResetEvent socketConnected = new ManualResetEvent(false);
-
         public override bool Setup()
         {
-            socketConnected.Reset();
-            
             try
             {
                 server.Start();
@@ -41,7 +37,6 @@ namespace RevisionProgram2.folderSync
                 return false;
             }
             
-            
             WaitingForm.BeginWait("Waiting for client to connect...", ev =>
             {
                 while (true)
@@ -49,7 +44,7 @@ namespace RevisionProgram2.folderSync
                     try
                     {
                         var waiting = Task.Run(async delegate { await Task.Delay(timeout); });
-
+                        
                         while (!server.Pending() && !waiting.IsCompleted) { }
 
                         if (server.Pending())

@@ -93,7 +93,7 @@ namespace RevisionProgram2.revision.assessments.tests
 
                                    newAns = newAns.Trim();
 
-                                   if (newAns != null)
+                                   if (newAns != "")
                                    {
                                        AnswerList.Items.Add(newAns);
                                        CheckValid();
@@ -127,15 +127,9 @@ namespace RevisionProgram2.revision.assessments.tests
 
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
-            if (MsgBox.ShowWait("Are you sure you want to delete this answer?",
-                                "Delete",
-                                MsgBox.Options.yesNo,
-                                MsgBox.MsgIcon.EXCL) == "Yes")
-            {
-                AnswerList.Items.Remove(AnswerList.SelectedItem);
-                CheckValid();
-                SetCombo();
-            }
+            AnswerList.Items.Remove(AnswerList.SelectedItem);
+            CheckValid();
+            SetCombo();
         }
 
         private void OKBtn_Click(object sender, EventArgs e)
@@ -178,12 +172,17 @@ namespace RevisionProgram2.revision.assessments.tests
 
         internal Question GetQuestion()
         {
+            /*
             List<string> answerList = new List<string>();
             foreach (string s in AnswerList.Items)
             {
                 answerList.Add(s);
             }
-            return new Question(QuestionTxt.Text.Trim(), answerList.ToArray(), MultipleCheck.Checked ? CorrectCombo.SelectedIndex : -1);
+            */
+            
+            return new Question(QuestionTxt.Text.Trim(), 
+                                AnswerList.Items.Cast<string>().ToArray(), 
+                                MultipleCheck.Checked ? CorrectCombo.SelectedIndex : -1);
         }
 
         private void MultipleCheck_CheckedChanged(object sender, EventArgs e)

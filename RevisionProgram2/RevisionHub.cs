@@ -416,5 +416,31 @@ namespace RevisionProgram2
                 explorer.RefreshPanels();
             }
         }
+
+        private void FriendRoomBtn_Click(object sender, EventArgs e)
+        {
+            var onlineChoose = new OnlineChoose();
+
+            SetNativeEnabled(false);
+
+            onlineChoose.FormClosing += (s, ev) =>
+            {
+                SetNativeEnabled(true);
+
+                if (onlineChoose.DialogResult == DialogResult.OK)
+                {
+                    if (onlineChoose.Host)
+                    {
+                        ReadySync(() => FolderSync.Sync(new ServerSync(onlineChoose.Port)));
+                    }
+                    else
+                    {
+                        ReadySync(() => FolderSync.Sync(new ClientSync(onlineChoose.IP, onlineChoose.Port)));
+                    }
+                }
+            };
+
+            onlineChoose.Show();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using RevisionProgram2.dialogs;
+using RevisionProgram2.onlineFeatures;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,42 +32,6 @@ namespace RevisionProgram2.folderSync
             stream?.Close();
         }
 
-        protected bool WaitForResponse()
-        {
-            ReadByte();
-            return true;
-        }
-
-        protected int ReadByte()
-        {
-            int b;
-            while ((b = stream.ReadByte()) == -1) { }
-            return b;
-        }
-
-        protected int ReadBytes(byte[] buffer, int offset, int size)
-        {
-            int i;
-            while ((i = stream.Read(buffer, offset, size)) == 0) { }
-            return i;
-        }
-
-        protected string ReadString()
-        {
-            byte[] buffer = new byte[socket.ReceiveBufferSize];
-            int i;
-
-            while ((i = stream.Read(buffer, 0, buffer.Length)) == 0) { }
-
-            return Encoding.ASCII.GetString(buffer, 0, i);
-        }
-
-        protected void SendString(string s)
-        {
-            byte[] bytes = Encoding.ASCII.GetBytes(s);
-            stream.Write(bytes, 0, bytes.Length);
-        }
-
         protected virtual string WriteDirectory => Helper.LocalDirectory;
 
         void SyncError(string reason)
@@ -89,9 +54,9 @@ namespace RevisionProgram2.folderSync
                 {
                     var filePath = allFiles.Dequeue();
 
-                    SendString(filePath);
+                    stream.SendString(filePath);
 
-                    if (ReadByte() == 1)
+                    if (stream.ReadByte() == 1)
                     {
                         queue.Enqueue(filePath);
                     }
@@ -99,7 +64,7 @@ namespace RevisionProgram2.folderSync
                     progress.Report((float)i / amount);
                 }
 
-                SendString("E");
+                stream.SendString("E");
 
                 return queue;
             } catch (IOException ex)
@@ -118,13 +83,13 @@ namespace RevisionProgram2.folderSync
 
             try
             {
-                ReadBytes(buffer, 0, 2);
+                stream.ReadBytes(buffer, 0, 2);
                 amount = BitConverter.ToUInt16(buffer, 0);
 
                 int i = 0;
 
                 string receive;
-                while ((receive = ReadString()).Length > 1)
+                while ((receive = stream.ReadString(socket.ReceiveBufferSize)).Length > 1)
                 {
                     string writePath = $"{WriteDirectory}{receive}";
                     if (!File.Exists(writePath))
@@ -160,19 +125,19 @@ namespace RevisionProgram2.folderSync
             using (var source = File.OpenRead($"{WriteDirectory}{from}"))
             {
                 int i;
-
+                
                 try
                 {
                     while ((i = source.Read(buffer, 0, bufferSize)) > 0)
                     {
                         stream.WriteByte(0);
-                        WaitForResponse();
+                        stream.WaitForResponse();
 
                         stream.Write(BitConverter.GetBytes((ushort)i), 0, 2);
-                        WaitForResponse();
+                        stream.WaitForResponse();
 
                         stream.Write(buffer, 0, i);
-                        WaitForResponse();
+                        stream.WaitForResponse();
                     }
 
                     stream.WriteByte(1);
@@ -198,17 +163,17 @@ namespace RevisionProgram2.folderSync
                 {
                     while (true)
                     {
-                        if (ReadByte() == 1) break;
+                        if (stream.ReadByte() == 1) break;
                         stream.WriteByte(0);
 
                         byte[] buffer2 = new byte[2];
-                        ReadBytes(buffer2, 0, 2);
+                        stream.ReadBytes(buffer2, 0, 2);
                         int length = BitConverter.ToUInt16(buffer2, 0);
 
                         stream.WriteByte(0);
 
                         buffer = new byte[length];
-                        ReadBytes(buffer, 0, length);
+                        stream.ReadBytes(buffer, 0, length);
                         source.Write(buffer, 0, length);
 
                         stream.WriteByte(0);
