@@ -83,13 +83,13 @@ namespace RevisionProgram2.folderSync
 
             try
             {
-                stream.ReadBytes(buffer, 0, 2);
+                stream.WaitForBytes(buffer, 0, 2);
                 amount = BitConverter.ToUInt16(buffer, 0);
 
                 int i = 0;
 
                 string receive;
-                while ((receive = stream.ReadString(socket.ReceiveBufferSize)).Length > 1)
+                while ((receive = stream.WaitForString(socket.ReceiveBufferSize)).Length > 1)
                 {
                     string writePath = $"{WriteDirectory}{receive}";
                     if (!File.Exists(writePath))
@@ -167,13 +167,13 @@ namespace RevisionProgram2.folderSync
                         stream.WriteByte(0);
 
                         byte[] buffer2 = new byte[2];
-                        stream.ReadBytes(buffer2, 0, 2);
+                        stream.WaitForBytes(buffer2, 0, 2);
                         int length = BitConverter.ToUInt16(buffer2, 0);
 
                         stream.WriteByte(0);
 
                         buffer = new byte[length];
-                        stream.ReadBytes(buffer, 0, length);
+                        stream.WaitForBytes(buffer, 0, length);
                         source.Write(buffer, 0, length);
 
                         stream.WriteByte(0);

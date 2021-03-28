@@ -2,6 +2,7 @@
 using RevisionProgram2.alerts;
 using RevisionProgram2.dialogs;
 using RevisionProgram2.folderSync;
+using RevisionProgram2.netRoom;
 using RevisionProgram2.news;
 using RevisionProgram2.packs;
 using RevisionProgram2.Properties;
@@ -419,28 +420,48 @@ namespace RevisionProgram2
 
         private void FriendRoomBtn_Click(object sender, EventArgs e)
         {
-            var onlineChoose = new OnlineChoose();
+            if (NetRoomPeer.CurrentRoom != null)
+            {
+                return;
+            }
 
             SetNativeEnabled(false);
 
-            onlineChoose.FormClosing += (s, ev) =>
-            {
-                SetNativeEnabled(true);
-
-                if (onlineChoose.DialogResult == DialogResult.OK)
+            // Asks for the name of the theme.
+            TextInput.GetInput("Enter a username:",
+                "New Theme",
+                username =>
                 {
-                    if (onlineChoose.Host)
+                    if (username == "")
                     {
-                        ReadySync(() => FolderSync.Sync(new ServerSync(onlineChoose.Port)));
+                        SetNativeEnabled(true);
+                        return;
                     }
-                    else
-                    {
-                        ReadySync(() => FolderSync.Sync(new ClientSync(onlineChoose.IP, onlineChoose.Port)));
-                    }
-                }
-            };
 
-            onlineChoose.Show();
+                    Settings.Default.username = username;
+                    Settings.Default.Save();
+
+                    var onlineChoose = new OnlineChoose();
+
+                    onlineChoose.FormClosing += (s, ev) =>
+                    {
+                        SetNativeEnabled(true);
+
+                        if (onlineChoose.DialogResult == DialogResult.OK)
+                        {
+                            if (onlineChoose.Host)
+                            {
+                                NetRoomServer.Begin(username, onlineChoose.Port);
+                            }
+                            else
+                            {
+                                NetRoomClient.Begin(username, onlineChoose.IP, onlineChoose.Port);
+                            }
+                        }
+                    };
+
+                    onlineChoose.Show();
+                }, Settings.Default.username);
         }
     }
 }

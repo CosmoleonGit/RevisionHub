@@ -36,6 +36,7 @@ namespace RevisionProgram2.netRoom
             this.SendBtn = new System.Windows.Forms.Button();
             this.MessageLbl = new System.Windows.Forms.Label();
             this.SendTxt = new System.Windows.Forms.TextBox();
+            this.NetworkWorker = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,6 +72,9 @@ namespace RevisionProgram2.netRoom
             // 
             // ChatTxt
             // 
+            this.ChatTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ChatTxt.Location = new System.Drawing.Point(181, 7);
             this.ChatTxt.Multiline = true;
             this.ChatTxt.Name = "ChatTxt";
@@ -80,6 +84,7 @@ namespace RevisionProgram2.netRoom
             // 
             // SendBtn
             // 
+            this.SendBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.SendBtn.Enabled = false;
             this.SendBtn.Location = new System.Drawing.Point(476, 449);
             this.SendBtn.Name = "SendBtn";
@@ -91,6 +96,7 @@ namespace RevisionProgram2.netRoom
             // 
             // MessageLbl
             // 
+            this.MessageLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MessageLbl.AutoSize = true;
             this.MessageLbl.Location = new System.Drawing.Point(180, 454);
             this.MessageLbl.Name = "MessageLbl";
@@ -100,7 +106,9 @@ namespace RevisionProgram2.netRoom
             // 
             // SendTxt
             // 
-            this.SendTxt.Location = new System.Drawing.Point(250, 451);
+            this.SendTxt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SendTxt.Location = new System.Drawing.Point(250, 453);
             this.SendTxt.Name = "SendTxt";
             this.SendTxt.Size = new System.Drawing.Size(219, 25);
             this.SendTxt.TabIndex = 4;
@@ -121,6 +129,8 @@ namespace RevisionProgram2.netRoom
             this.Name = "ChatRoom";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chat Room";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChatRoom_FormClosing);
+            this.Load += new System.EventHandler(this.ChatRoom_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -137,5 +147,6 @@ namespace RevisionProgram2.netRoom
         private System.Windows.Forms.Button SendBtn;
         private System.Windows.Forms.Label MessageLbl;
         private System.Windows.Forms.TextBox SendTxt;
+        private System.ComponentModel.BackgroundWorker NetworkWorker;
     }
 }

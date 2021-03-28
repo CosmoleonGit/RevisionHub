@@ -15,21 +15,21 @@ namespace RevisionProgram2.onlineFeatures
             return true;
         }
 
-        public static int ReadByte(this Stream stream)
+        public static int WaitForByte(this Stream stream)
         {
             int b;
             while ((b = stream.ReadByte()) == -1) { }
             return b;
         }
 
-        public static int ReadBytes(this Stream stream, byte[] buffer, int offset, int size)
+        public static int WaitForBytes(this Stream stream, byte[] buffer, int offset, int size)
         {
             int i;
             while ((i = stream.Read(buffer, offset, size)) == 0) { }
             return i;
         }
 
-        public static string ReadString(this Stream stream, int size)
+        public static string WaitForString(this Stream stream, int size)
         {
             byte[] buffer = new byte[size];
             int i;

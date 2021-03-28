@@ -53,7 +53,7 @@ namespace RevisionProgram2.folderSync
                 IPLbl.Enabled = false;
                 IPTxt.Enabled = false;
             }
-
+            
             CheckValid();
         }
 

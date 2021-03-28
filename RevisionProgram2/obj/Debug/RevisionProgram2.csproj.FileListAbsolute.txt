@@ -222,4 +222,3 @@ C:\Users\Compaq\source\repos\RevisionHub\RevisionProgram2\obj\Debug\RevisionProg
 C:\Users\Compaq\source\repos\RevisionHub\RevisionProgram2\obj\Debug\RevisionHub.exe
 C:\Users\Compaq\source\repos\RevisionHub\RevisionProgram2\obj\Debug\RevisionHub.pdb
 C:\Users\Compaq\source\repos\RevisionHub\RevisionProgram2\obj\Debug\RevisionProgram2.netRoom.ChatRoom.resources
-C:\Users\Compaq\source\repos\RevisionHub\RevisionProgram2\obj\Debug\RevisionProgram2.netRoom.ServerWait.resources

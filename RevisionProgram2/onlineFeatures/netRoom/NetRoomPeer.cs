@@ -5,17 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RevisionProgram2.netRoom
 {
     public abstract class NetRoomPeer
     {
-        public NetRoomPeer(List<ClientMember> members)
+        public static NetRoomPeer CurrentRoom;
+
+        public NetRoomPeer(string username)
         {
-            room = new ChatRoom(members);
+            room = new ChatRoom(username);
         }
 
-        readonly ChatRoom room;
+        protected readonly ChatRoom room;
 
         public void Begin()
         {

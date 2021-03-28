@@ -1,6 +1,7 @@
 ﻿#define OFFLINE
 
 using RevisionProgram2.dialogs;
+using RevisionProgram2.onlineFeatures;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -32,6 +33,7 @@ namespace RevisionProgram2.folderSync
 
         public override bool Setup()
         {
+            /*
             bool closed = false;
             WaitingForm.BeginWait("Connecting to host...", ev => 
             {
@@ -57,6 +59,11 @@ namespace RevisionProgram2.folderSync
             });
             
             if (closed || !client.Connected) return false;
+            */
+
+            bool result = ClientConnect.Attempt(client, ip, port);
+
+            if (!result) return false;
 
             socket = client.Client;
             socket.SendBufferSize = bufferSize;

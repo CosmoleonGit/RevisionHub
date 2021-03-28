@@ -158,10 +158,11 @@
     <Compile Include="folderSync\DriveSync.cs" />
     <Compile Include="folderSync\FolderSync.cs" />
     <Compile Include="folderSync\FolderSyncInterface.cs" />
-    <Compile Include="folderSync\OnlineChoose.cs">
+    <Compile Include="onlineFeatures\ClientConnect.cs" />
+    <Compile Include="onlineFeatures\OnlineChoose.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="folderSync\OnlineChoose.Designer.cs">
+    <Compile Include="onlineFeatures\OnlineChoose.Designer.cs">
       <DependentUpon>OnlineChoose.cs</DependentUpon>
     </Compile>
     <Compile Include="folderSync\OnlineSync.cs" />
@@ -177,12 +178,6 @@
     <Compile Include="onlineFeatures\netRoom\NetRoomClient.cs" />
     <Compile Include="onlineFeatures\netRoom\NetRoomPeer.cs" />
     <Compile Include="onlineFeatures\netRoom\NetRoomServer.cs" />
-    <Compile Include="onlineFeatures\netRoom\ServerWait.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="onlineFeatures\netRoom\ServerWait.Designer.cs">
-      <DependentUpon>ServerWait.cs</DependentUpon>
-    </Compile>
     <Compile Include="onlineFeatures\news\NewsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -401,14 +396,11 @@
     <EmbeddedResource Include="folderSync\ChooseDrive.resx">
       <DependentUpon>ChooseDrive.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="folderSync\OnlineChoose.resx">
+    <EmbeddedResource Include="onlineFeatures\OnlineChoose.resx">
       <DependentUpon>OnlineChoose.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="onlineFeatures\netRoom\ChatRoom.resx">
       <DependentUpon>ChatRoom.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="onlineFeatures\netRoom\ServerWait.resx">
-      <DependentUpon>ServerWait.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="onlineFeatures\news\NewsForm.resx">
       <DependentUpon>NewsForm.cs</DependentUpon>

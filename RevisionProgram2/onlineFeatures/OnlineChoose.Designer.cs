@@ -147,7 +147,7 @@ namespace RevisionProgram2.folderSync
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "OnlineChoose";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Online Sync";
+            this.Text = "Connect";
             this.Load += new System.EventHandler(this.OnlineChoose_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PortNumeric)).EndInit();
             this.SettingsGroup.ResumeLayout(false);
