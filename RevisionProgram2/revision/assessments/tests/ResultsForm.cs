@@ -14,23 +14,18 @@ using static RevisionProgram2.revision.assessments.tests.TestTester;
 
 namespace RevisionProgram2.revision.assessments.tests
 {
+
     internal partial class ResultsForm : Form
     {
-        readonly string name;
-        internal AskingQuestion[] questions;
-
-        internal ResultsForm(string _name, AskingQuestion[] _questions)
+        internal ResultsForm(string name, TestResults results, bool oneOff = false)
         {
             InitializeComponent();
-
-            name = _name;
-            questions = _questions;
 
             Text = name + " - Test Results";
 
             uint correctAnswers = 0;
 
-            foreach (AskingQuestion q in questions)
+            foreach (AskingQuestion q in results.All)
             {
                 if (q.Correct) correctAnswers++;
 
@@ -102,7 +97,9 @@ namespace RevisionProgram2.revision.assessments.tests
                     Font = ResultsPanel.Font,
                     MaximumSize = new Size(qtPanel.Width - 80, 0),
                     AutoSize = true,
-                    Text = "Your guess: " + q.Guess + Helper.twoLines + q.AnswerList(),
+                    Text = $"Your guess: {q.Guess}" +
+                           $"\n\n" +
+                           $"{q.AnswerList()}",
                     BackColourName = "QuestionBackcolour",
                     ForeColourName = "QuestionForecolour"
                 };
@@ -112,7 +109,6 @@ namespace RevisionProgram2.revision.assessments.tests
                 gPanel.Height = gPanel.PreferredSize.Height + 6;
 
                 // Add all of the labels in reverse order (cause that's how docking works apparently)
-                //qPanel.Controls.Add(cALabel);
                 qtPanel.Controls.Add(gPanel);
                 qtPanel.Controls.Add(corLabel);
                 qtPanel.Controls.Add(qPanel);
@@ -125,11 +121,16 @@ namespace RevisionProgram2.revision.assessments.tests
                 ResultsPanel.Controls.Add(qtPanel);
             }
             
-            ScoreLbl.Text = $"You scored {correctAnswers} out of {questions.Length}" +
-                            $" ({Math.Round((float)correctAnswers / questions.Length * 100, 1, MidpointRounding.AwayFromZero)}%)";
-            //percentageLbl.Text = CStr(Math.Round((correctAnswers / questions.Count) * 100, 1, MidpointRounding.AwayFromZero)) & "%"
+            ScoreLbl.Text = $"You scored {results.Correct.Count()} out of {results.All.Count()}" +
+                            $" ({results.PercentageString})";
 
-            TestIncorrectBtn.Visible = correctAnswers != questions.Length;
+            TestIncorrectBtn.Visible = results.Incorrect.Any();
+
+            if (oneOff)
+            {
+                TestIncorrectBtn.Visible = false;
+                TryAgainBtn.Visible = false;
+            }
         }
 
         private void ResultsForm_Load(object sender, EventArgs e)
@@ -152,15 +153,6 @@ namespace RevisionProgram2.revision.assessments.tests
 
         private void TestIncorrectBtn_Click(object sender, EventArgs e)
         {
-            /*
-            var questionList = new List<Test.Question>();
-
-            foreach (AskingQuestion q in questions)
-            {
-                if (!q.Correct) questionList.Add(q.question);
-            }
-            */
-
             DialogResult = DialogResult.Abort;
             Close();
         }

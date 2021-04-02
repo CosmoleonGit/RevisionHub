@@ -70,7 +70,7 @@ namespace RevisionProgram2.revision.explorer.panels
                                        }
                                        catch (Exception ex)
                                        {
-                                           Helper.Error("Error renaming file.", $"Reason: {ex.Message}");
+                                           Helper.Error("Error renaming file.", ex.Message);
                                        }
                                    }
                                },

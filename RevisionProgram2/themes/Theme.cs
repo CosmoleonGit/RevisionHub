@@ -46,7 +46,7 @@ namespace RevisionProgram2.Themes
 
         public static Theme GetThemeFromStrings(string name, string[] lines, bool modifiable = true)    // Converts an array of strings into a theme.
         {
-            Theme theme = new Theme(name, modifiable);
+            var theme = new Theme(name, modifiable);
 
             foreach (string line in lines)
             {
@@ -141,7 +141,7 @@ namespace RevisionProgram2.Themes
         {
             List<string> data = new List<string>();
 
-            foreach (KeyValuePair<string, Color> item in theme.cColours)
+            foreach (var item in theme.cColours)
             {
                 data.Add(item.Key + ":" + item.Value.ToArgb().ToString());
             }
@@ -249,7 +249,11 @@ namespace RevisionProgram2.Themes
                 { "IncorrectForecolour", Color.Maroon },
                 { "QuestionBackcolour", Color.White },
                 { "QuestionForecolour", Color.Black },
-                { "StopwatchFlash", Color.Red }
+                { "StopwatchFlash", Color.Red },
+                { "AcceptBackColour", Color.Lime },
+                { "AcceptForeColour", SystemColors.ControlText },
+                { "DeclineBackColour", Color.Red },
+                { "DeclineForeColour", SystemColors.ControlText }
             };
             
             CanModify = modifiable;

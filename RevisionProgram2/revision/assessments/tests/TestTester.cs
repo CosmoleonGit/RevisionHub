@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace RevisionProgram2.revision.assessments.tests
 
         readonly bool canSkip;
 
-        public TestTester(string flashcardsName, Question[] _questions, bool _canSkip = false)
+        public TestTester(string flashcardsName, IEnumerable<Question> _questions, bool _canSkip = false)
         {
             InitializeComponent();
 
@@ -33,16 +34,14 @@ namespace RevisionProgram2.revision.assessments.tests
 
             Text = flashcardsName + " - Test";
 
-            var list = new List<AskingQuestion>();
-            foreach (Question q in _questions)
-            {
-                list.Add(new AskingQuestion(q));
-            }
+            var list = _questions.Select(x => new AskingQuestion(x)).ToList();
 
             questions = list.ToArray();
 
             TestProgress.Maximum = questions.Length;
         }
+
+        public TestResults Results => new TestResults(questions);
 
         private void TestTester_Load(object sender, EventArgs e)
         {

@@ -40,7 +40,7 @@ namespace RevisionProgram2.revision.assessments.tests
 
         public Action onFinish;
         readonly string testName;
-        public TestEditor(string _testName, string description = "", Question[] questionArray = null)
+        public TestEditor(string _testName, string description = "", IEnumerable<Question> questionArray = null)
         {
             InitializeComponent();
 
@@ -245,50 +245,6 @@ namespace RevisionProgram2.revision.assessments.tests
         private void PreviewBtn_Click(object sender, EventArgs e)
         {
             StartTest(testName, questions.ToArray(), false);
-
-            /*
-            var tester = new TestTester(testName, questions.ToArray());
-
-            while (true)
-            {
-                
-                if (tester.ShowDialog() == DialogResult.OK)
-                {
-                    var results = new ResultsForm(testName, tester.questions);
-
-                    var resultResult = results.ShowDialog();
-
-                    if (resultResult == DialogResult.Cancel || resultResult == DialogResult.None)
-                    {
-                        break;
-                    } else if (resultResult == DialogResult.OK)
-                    {
-                        AskingQuestion[] tempQs = tester.questions;
-                        Helper.ShuffleArray(ref tempQs);
-
-                        var qs = new List<Question>();
-                        foreach (AskingQuestion q in tempQs)
-                        {
-                            qs.Add(q.question);
-                        }
-
-                        tester = new TestTester(testName, qs.ToArray());
-                        //tester.questions = tempQs;
-                    } else
-                    {
-                        var questionList = new List<Question>();
-
-                        foreach (AskingQuestion q in results.questions)
-                        {
-                            if (!q.Correct) questionList.Add(q.question);
-                        }
-
-                        tester = new TestTester(testName, questionList.ToArray(), true);
-                    }
-                } else { break; }
-            }
-
-            */
         }
 
         private void DescTxt_TextChanged(object sender, EventArgs e)

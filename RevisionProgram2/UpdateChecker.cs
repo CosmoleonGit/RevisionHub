@@ -46,7 +46,7 @@ namespace RevisionProgram2
                 }
                 catch (WebException ex)
                 {
-                    if (!quiet) Helper.Error("Failed to load pack data.", "Reason: " + ex.Message);
+                    if (!quiet) Helper.Error("Failed to load pack data.", ex.Message);
                 } finally
                 {
                     File.Delete(savePath);
@@ -63,7 +63,7 @@ namespace RevisionProgram2
 
                 if (curVer != newVer)
                 {
-                    if (MsgBox.ShowWait($"There is a new version of Revision Hub (v{newVer})." + Helper.twoLines + "Would you like to go to the download page?",
+                    if (MsgBox.ShowWait($"There is a new version of Revision Hub (v{newVer}).\n\nWould you like to go to the download page?",
                                     "Check for Updates",
                                     MsgBox.Options.yesNo,
                                     MsgBox.MsgIcon.INFO) == "Yes")

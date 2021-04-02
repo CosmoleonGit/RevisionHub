@@ -89,6 +89,12 @@ namespace RevisionProgram2.specialControls
                             insertText = "ñ";
                         }
                         break;
+                    case Keys.OemQuestion:
+                        if (e.Shift)
+                        {
+                            insertText = "¿";
+                        }
+                        break;
                 }
 
                 if (insertText != "")

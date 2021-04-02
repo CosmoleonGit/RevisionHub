@@ -141,3 +141,5 @@ C:\Users\Compaq\source\repos\RevisionHub\RevisionProgram2\obj\Release\RevisionPr
 C:\Users\Compaq\source\repos\RevisionHub\RevisionProgram2\obj\Release\RevisionProgram2.csproj.CoreCompileInputs.cache
 C:\Users\Compaq\source\repos\RevisionHub\RevisionProgram2\obj\Release\RevisionHub.exe
 C:\Users\Compaq\source\repos\RevisionHub\RevisionProgram2\obj\Release\RevisionHub.pdb
+C:\Users\Compaq\source\repos\RevisionHub\RevisionProgram2\obj\Release\RevisionProgram2.onlineFeatures.netRoom.ChatRoom.resources
+C:\Users\Compaq\source\repos\RevisionHub\RevisionProgram2\obj\Release\RevisionProgram2.revision.explorer.panels.TestPanel.resources

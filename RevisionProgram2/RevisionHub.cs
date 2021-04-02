@@ -2,8 +2,8 @@
 using RevisionProgram2.alerts;
 using RevisionProgram2.dialogs;
 using RevisionProgram2.folderSync;
-using RevisionProgram2.netRoom;
 using RevisionProgram2.news;
+using RevisionProgram2.onlineFeatures.netRoom;
 using RevisionProgram2.packs;
 using RevisionProgram2.Properties;
 using RevisionProgram2.revision;
@@ -210,30 +210,32 @@ namespace RevisionProgram2
 
         private void RevisionHub_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!closing && e.CloseReason == CloseReason.UserClosing)
-            {
-                FormCollection openForms = Application.OpenForms;
-                
-                if (openForms.Count < 2)
-                {
-                    Hide();
-                }
-                else if (MsgBox.ShowWait("This will hide all windows in the Revision Hub" + Helper.twoLines + "Do you want to proceed?",
-                                     "Closure",
-                                     MsgBox.Options.yesNo, MsgBox.MsgIcon.EXCL) == "Yes")
-                {
-                    foreach (Form f in openForms) { f.Hide(); }
-                }
-
-                e.Cancel = true;
-            }
-            else
+            if (closing || e.CloseReason != CloseReason.UserClosing)
             {
                 // Hides the alert icon because Windows won't do it itself for some reason
-                
+
                 Alert.NotifyIcon.Visible = false;
                 Alert.NotifyIcon.Dispose();
+
+                return;
             }
+
+            FormCollection openForms = Application.OpenForms;
+
+            if (openForms.Count < 2)
+            {
+                Hide();
+            }
+            else if (MsgBox.ShowWait("This will hide all windows in the Revision Hub" +
+                                     "\n\n" +
+                                     "Do you want to proceed?",
+                                     "Closure",
+                                     MsgBox.Options.yesNo, MsgBox.MsgIcon.EXCL) == "Yes")
+            {
+                foreach (Form f in openForms) { f.Hide(); }
+            }
+
+            e.Cancel = true;
         }
 
         ThemeChange themeChange;
@@ -293,16 +295,16 @@ namespace RevisionProgram2
         {
             if (e.Control)
             {
-                if (e.KeyCode == Keys.L)
+                switch (e.KeyCode)
                 {
-                    Theme.ChangeGlobalTheme(0);
-                }
-                else if (e.KeyCode == Keys.D)
-                {
-                    Theme.ChangeGlobalTheme(1);
+                    case Keys.L:
+                        Theme.ChangeGlobalTheme(0);
+                        break;
+                    case Keys.D:
+                        Theme.ChangeGlobalTheme(1);
+                        break;
                 }
             }
-
         }
 
         static TimerStopwatch timerStopwatch = new TimerStopwatch();
@@ -429,7 +431,7 @@ namespace RevisionProgram2
 
             // Asks for the name of the theme.
             TextInput.GetInput("Enter a username:",
-                "New Theme",
+                "Friend Room",
                 username =>
                 {
                     if (username == "")

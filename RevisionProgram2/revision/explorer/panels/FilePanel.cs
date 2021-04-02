@@ -40,6 +40,8 @@ namespace RevisionProgram2.revision.explorer.panels
             return RevisionExplorer.EditingList.Contains(Dir + PanelName);
         }
 
+        protected ContextMenuStrip GetContext => OptionsContext;
+
         protected override void EditingChanges(bool editing)
         {
             Enabled = !editing;
@@ -72,12 +74,12 @@ namespace RevisionProgram2.revision.explorer.panels
             {
                 try
                 {
-                    File.Delete(Dir + "/" + PanelName);
+                    File.Delete($"{Dir}/{PanelName}");
                     Delete();
                 }
                 catch (Exception ex)
                 {
-                    Helper.Error("Error moving file.", $"Reason: {ex.Message}");
+                    Helper.Error("Error moving file.", ex.Message);
                 }
             }
         }

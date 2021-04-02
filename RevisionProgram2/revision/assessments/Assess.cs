@@ -40,6 +40,8 @@ namespace RevisionProgram2.revision.assessments
             description = desc;
         }
 
+        public Assess(string path) : this(Path.GetFileName(path), Path.GetDirectoryName(path)) { }
+
         public readonly string name;
         protected readonly string path;
 

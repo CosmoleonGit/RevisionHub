@@ -31,7 +31,7 @@ namespace RevisionProgram2.packs
                 }
                 catch (Exception ex)
                 {
-                    Helper.Error("Failed to load pack data.", "Reason: " + ex.Message);
+                    Helper.Error("Failed to load pack data.", ex.Message);
                 }
             });
 

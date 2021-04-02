@@ -45,7 +45,7 @@ namespace RevisionProgram2.news
                 }
                 catch (WebException ex)
                 {
-                    Helper.Error("Failed to load pack data.", "Reason: " + ex.Message);
+                    Helper.Error("Failed to load pack data.", ex.Message);
                 }
             });
 

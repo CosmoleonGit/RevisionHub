@@ -29,8 +29,15 @@ namespace RevisionProgram2.revision.explorer.panels
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // TestPanel
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Name = "TestPanel";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

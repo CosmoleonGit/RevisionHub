@@ -42,7 +42,7 @@ namespace RevisionProgram2.onlineFeatures
         }
 
         static bool ConnectionFailure() => MsgBox.ShowWait($"Could not connect to recipient." +
-                                                           $"{Helper.twoLines}" +
+                                                           $"\n\n" +
                                                            $"Would you like to try again?",
                                                            "Connection timeout.",
                                                            MsgBox.Options.yesNo,

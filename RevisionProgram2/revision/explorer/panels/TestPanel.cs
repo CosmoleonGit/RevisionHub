@@ -1,4 +1,6 @@
-﻿using RevisionProgram2.revision.assessments.tests;
+﻿using RevisionProgram2.dialogs;
+using RevisionProgram2.onlineFeatures.netRoom;
+using RevisionProgram2.revision.assessments.tests;
 using RevisionProgram2.revision.tests;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,23 @@ namespace RevisionProgram2.revision.explorer.panels
     public partial class TestPanel : FilePanel
     {
 
-        public TestPanel(Panel owner, string name, string path) : base(owner, name, path) { }
+        public TestPanel(Panel owner, string name, string path) : base(owner, name, path)
+        {
+            if (NetRoomPeer.CurrentRoom != null &&
+                NetRoomPeer.CurrentRoom is NetRoomServer)
+            {
+                GetContext.Items.Add(new ToolStripSeparator());
+
+                var challengeStrip = new ToolStripMenuItem()
+                {
+                    Text = "Challenge"
+                };
+
+                challengeStrip.Click += ChallengeStrip_Click;
+
+                GetContext.Items.Add(challengeStrip);
+            }
+        }
 
         protected override Image GetIcon()
         {
@@ -54,6 +72,21 @@ namespace RevisionProgram2.revision.explorer.panels
                     GetForm.StopEditing(Dir);
                     if (n != "" && d == Dir) GetForm.AddPanel(new TestPanel(owner, n, Dir), true);
                 });
+        }
+
+        private void ChallengeStrip_Click(object sender, EventArgs e)
+        {
+            if (NetRoomPeer.CurrentRoom != null)
+            {
+                NetRoomPeer.CurrentRoom.Challenge($"{Dir}{PanelName}");
+            }
+            else
+            {
+                MsgBox.ShowWait("A friend room is not currently open.",
+                                "Challenge",
+                                null,
+                                MsgBox.MsgIcon.ERROR);
+            }
         }
     }
 }

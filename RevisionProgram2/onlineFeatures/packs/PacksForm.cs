@@ -67,7 +67,9 @@ namespace RevisionProgram2.packs
             // Check if a folder with that name already exists.
             if (OverwritePanel.Visible)
             {
-                if (MsgBox.ShowWait($"A folder with this name already exists.{Helper.twoLines}Do you want to overwrite it?",
+                if (MsgBox.ShowWait($"A folder with this name already exists." +
+                                    $"\n\n" +
+                                    $"Do you want to overwrite it?",
                     "Overwrite File",
                     MsgBox.Options.yesNo,
                     MsgBox.MsgIcon.EXCL) == "Yes")
@@ -92,7 +94,7 @@ namespace RevisionProgram2.packs
                 }
                 catch (WebException ex)
                 {
-                    Helper.Error("Failed to download pack.", $"Reason: {ex.Message}");
+                    Helper.Error("Failed to download pack.", ex.Message);
                 }
 
                 if (worked)
@@ -111,7 +113,7 @@ namespace RevisionProgram2.packs
                     }
                     catch (Exception ex)
                     {
-                        Helper.Error("Failed to download pack.", $"Reason: {ex.Message}");
+                        Helper.Error("Failed to download pack.", ex.Message);
                     }
                 }
             });
@@ -119,7 +121,9 @@ namespace RevisionProgram2.packs
             // If downloading was successful, extract the file.
             if (worked)
             {
-                if (MsgBox.ShowWait($"Successfully downloaded {packName}! You will find it in your Revision folder.{Helper.twoLines}Would you like to go to it now?",
+                if (MsgBox.ShowWait($"Successfully downloaded {packName}! You will find it in your Revision folder." +
+                                    $"\n\n" +
+                                    $"Would you like to go to it now?",
                             "Finished",
                             MsgBox.Options.yesNo,
                             MsgBox.MsgIcon.TICK) == "Yes")

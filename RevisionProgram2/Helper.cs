@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 public static class Helper
 {
-    public static readonly string directory = "C:/Users/" + Environment.UserName + "/Revision Hub/";
+    public static readonly string directory = $"C:/Users/{Environment.UserName}/Revision Hub/";
     static readonly string localDirectory = $"{directory}Revision/";
     public static string LocalDirectory
     {
@@ -72,7 +72,7 @@ public static class Helper
 
     public static void Error(string s, string reason)
     {
-        MsgBox.ShowWait($"{s + twoLines}Reason: {reason + twoLines}If you keep having problems please contact the developer.",
+        MsgBox.ShowWait($"{s + twoLines}Reason: {reason}\n\nIf you keep having problems please contact the developer.",
                     "Error", null, MsgBox.MsgIcon.ERROR);
     }
 

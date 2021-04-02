@@ -159,10 +159,10 @@
     <Compile Include="folderSync\FolderSync.cs" />
     <Compile Include="folderSync\FolderSyncInterface.cs" />
     <Compile Include="onlineFeatures\ClientConnect.cs" />
-    <Compile Include="onlineFeatures\OnlineChoose.cs">
+    <Compile Include="dialogs\OnlineChoose.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="onlineFeatures\OnlineChoose.Designer.cs">
+    <Compile Include="dialogs\OnlineChoose.Designer.cs">
       <DependentUpon>OnlineChoose.cs</DependentUpon>
     </Compile>
     <Compile Include="folderSync\OnlineSync.cs" />
@@ -227,9 +227,7 @@
     <Compile Include="revision\assessments\flashcards\FlashcardTester.Designer.cs">
       <DependentUpon>FlashcardTester.cs</DependentUpon>
     </Compile>
-    <Compile Include="revision\assessments\tests\AskingQuestion.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="revision\assessments\tests\AskingQuestion.cs" />
     <Compile Include="revision\assessments\tests\QPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -256,6 +254,7 @@
     <Compile Include="revision\assessments\tests\TestEditor.Designer.cs">
       <DependentUpon>TestEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="revision\assessments\tests\TestResults.cs" />
     <Compile Include="revision\assessments\tests\TestSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -342,7 +341,7 @@
     <Compile Include="specialControls\SpecialTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="themes\ColourSpecific.cs" />
+    <Compile Include="themes\IColourSpecific.cs" />
     <Compile Include="themes\ModifyTheme.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -396,7 +395,7 @@
     <EmbeddedResource Include="folderSync\ChooseDrive.resx">
       <DependentUpon>ChooseDrive.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="onlineFeatures\OnlineChoose.resx">
+    <EmbeddedResource Include="dialogs\OnlineChoose.resx">
       <DependentUpon>OnlineChoose.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="onlineFeatures\netRoom\ChatRoom.resx">
@@ -468,6 +467,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="revision\explorer\panels\ItemPanel.resx">
       <DependentUpon>ItemPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="revision\explorer\panels\TestPanel.resx">
+      <DependentUpon>TestPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="revision\explorer\RevisionExplorer.resx">
       <DependentUpon>RevisionExplorer.cs</DependentUpon>

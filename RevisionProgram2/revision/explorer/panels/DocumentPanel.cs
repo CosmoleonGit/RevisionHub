@@ -88,7 +88,9 @@ namespace RevisionProgram2.revision.explorer.panels
                                        }
                                        catch (Exception ex)
                                        {
-                                           MsgBox.ShowWait("Error renaming file." + Helper.twoLines + "Reason: " + ex.Message,
+                                           MsgBox.ShowWait($"Error renaming file." +
+                                                           $"\n\n" +
+                                                           $"Reason: {ex.Message}",
                                                "Error",
                                                MsgBox.Options.ok,
                                                MsgBox.MsgIcon.ERROR);

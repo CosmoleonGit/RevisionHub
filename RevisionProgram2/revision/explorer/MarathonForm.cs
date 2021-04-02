@@ -23,7 +23,7 @@ namespace RevisionProgram2.revision.explorer
             panels = _panels;
         }
 
-        FilePanel[] panels;
+        readonly FilePanel[] panels;
 
         private void MarathonForm_Load(object sender, EventArgs e)
         {
@@ -114,34 +114,15 @@ namespace RevisionProgram2.revision.explorer
                 if (MarathonList.GetItemChecked(i)) checkedList.Add(panels[i]);
             }
 
-            /*
-            for (int i = 0; i < checkedList.Count; i++)
-            {
-                if (i != 0)
-                {
-                    if (MsgBox.Show($"You have passed {i} of {checkedList.Count} assessments.{Helper.twoLines}" +
-                                    $"The next assessment is {checkedList[i].PanelName}.{Helper.twoLines}" +
-                                    $"Do you wish to continue?", $"{i} of {checkedList.Count}", MsgBox.Options.yesNo, MsgBox.MsgIcon.INFO) == "No")
-                    {
-                        return;
-                    }
-                }
-
-                panels[i].OnClick();
-            }
-            */
-
             int num = 0;
 
-            Action afterAssess = null;
-
-            afterAssess = () =>
+            void afterAssess()
             {
                 num++;
                 if (num != checkedList.Count)
                 {
-                    if (MsgBox.ShowWait($"You have passed {num} of {checkedList.Count} assessments.{Helper.twoLines}" +
-                                    $"The next assessment is {checkedList[num].PanelName}.{Helper.twoLines}" +
+                    if (MsgBox.ShowWait($"You have passed {num} of {checkedList.Count} assessments.\n\n" +
+                                    $"The next assessment is {checkedList[num].PanelName}.\n\n" +
                                     $"Do you wish to continue?", $"{num} of {checkedList.Count}", MsgBox.Options.yesNo, MsgBox.MsgIcon.INFO) == "No")
                     {
                         return;
@@ -154,7 +135,7 @@ namespace RevisionProgram2.revision.explorer
                     MsgBox.ShowWait("You have reached the end of the marathon.", "Marathon", null, MsgBox.MsgIcon.INFO);
                     return;
                 }
-            };
+            }
 
             checkedList[0].StartAssessment(afterAssess);
         }

@@ -16,11 +16,11 @@ namespace RevisionProgram2.revision.assessments.flashcards
 {
     public partial class FlashcardTester : Form
     {
-        public FlashcardTester(string flashcardsName, Card[] _cards)
+        public FlashcardTester(string flashcardsName, IEnumerable<Card> _cards)
         {
             InitializeComponent();
             Text = flashcardsName + " - Flashcards";
-            cards = _cards;
+            cards = _cards.ToArray();
         }
 
         readonly Card[] cards;

@@ -18,7 +18,7 @@ namespace RevisionProgram2.folderSync
         protected NetworkStream stream;
 
         protected bool ConnectionFailure() => MsgBox.ShowWait($"Could not connect to recipient." +
-                                                              $"{Helper.twoLines}" +
+                                                              $"\n\n" +
                                                               $"Would you like to try again?",
                                                               "Connection timeout.",
                                                               MsgBox.Options.yesNo,

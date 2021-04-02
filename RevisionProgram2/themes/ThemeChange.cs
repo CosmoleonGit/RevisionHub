@@ -200,7 +200,7 @@ namespace RevisionProgram2.Themes
                                    }
                                    catch (Exception ex)
                                    {
-                                       Helper.Error("Error renaming file.", $"Reason: {ex.Message}");
+                                       Helper.Error("Error renaming file.", ex.Message);
                                    }
                                }, ThemesList.SelectedItem.ToString(),
                                TextInput.dirNameValid);

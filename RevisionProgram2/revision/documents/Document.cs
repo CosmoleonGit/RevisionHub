@@ -13,11 +13,10 @@ namespace RevisionProgram2.revision.documents
     {
         internal const string documentVersion = "1";
 
-        readonly string name, dir, path;
+        readonly string name, path;
         public Document(string _name, string _dir)
         {
             name = _name;
-            dir = _dir;
             path = _dir + "/" + _name;
         }
 
@@ -144,7 +143,7 @@ namespace RevisionProgram2.revision.documents
                 return true;
             } catch (Exception ex)
             {
-                Helper.Error("Failed to open document.", $"Reason: {ex.Message}");
+                Helper.Error("Failed to open document.", ex.Message);
                 return false;
             }
         }

@@ -22,6 +22,11 @@ namespace RevisionProgram2.folderSync
         private void OnlineChoose_Load(object sender, EventArgs e)
         {
             Theme.ChangeFormTheme(this);
+
+#if DEBUG
+            IPTxt.Text = "127.0.0.1";
+            PortNumeric.Value = 1234;
+#endif
         }
 
         public bool Host => HostRadio.Checked;

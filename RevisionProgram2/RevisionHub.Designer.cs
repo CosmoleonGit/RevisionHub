@@ -40,13 +40,13 @@
             this.aboutGroup = new System.Windows.Forms.GroupBox();
             this.aboutBtn = new System.Windows.Forms.Button();
             this.OnlineGroup = new System.Windows.Forms.GroupBox();
+            this.FriendRoomBtn = new System.Windows.Forms.Button();
             this.UpdatesBtn = new System.Windows.Forms.Button();
             this.PacksBtn = new System.Windows.Forms.Button();
             this.NoticesBtn = new System.Windows.Forms.Button();
             this.SyncGroup = new System.Windows.Forms.GroupBox();
             this.SyncOnlineBtn = new System.Windows.Forms.Button();
             this.SyncDriveBtn = new System.Windows.Forms.Button();
-            this.FriendRoomBtn = new System.Windows.Forms.Button();
             this.GeneralGroup.SuspendLayout();
             this.ToolsGroup.SuspendLayout();
             this.ThemesGroup.SuspendLayout();
@@ -204,6 +204,20 @@
             this.OnlineGroup.TabStop = false;
             this.OnlineGroup.Text = "Online Features";
             // 
+            // FriendRoomBtn
+            // 
+            this.FriendRoomBtn.BackColor = System.Drawing.Color.LightGray;
+            this.FriendRoomBtn.FlatAppearance.BorderSize = 0;
+            this.FriendRoomBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FriendRoomBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FriendRoomBtn.Location = new System.Drawing.Point(7, 135);
+            this.FriendRoomBtn.Name = "FriendRoomBtn";
+            this.FriendRoomBtn.Size = new System.Drawing.Size(233, 31);
+            this.FriendRoomBtn.TabIndex = 6;
+            this.FriendRoomBtn.Text = "Friend Room";
+            this.FriendRoomBtn.UseVisualStyleBackColor = false;
+            this.FriendRoomBtn.Click += new System.EventHandler(this.FriendRoomBtn_Click);
+            // 
             // UpdatesBtn
             // 
             this.UpdatesBtn.BackColor = System.Drawing.Color.LightGray;
@@ -284,20 +298,6 @@
             this.SyncDriveBtn.Text = "Sync With Drive";
             this.SyncDriveBtn.UseVisualStyleBackColor = false;
             this.SyncDriveBtn.Click += new System.EventHandler(this.SyncDriveBtn_Click);
-            // 
-            // FriendRoomBtn
-            // 
-            this.FriendRoomBtn.BackColor = System.Drawing.Color.LightGray;
-            this.FriendRoomBtn.FlatAppearance.BorderSize = 0;
-            this.FriendRoomBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.FriendRoomBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FriendRoomBtn.Location = new System.Drawing.Point(7, 135);
-            this.FriendRoomBtn.Name = "FriendRoomBtn";
-            this.FriendRoomBtn.Size = new System.Drawing.Size(233, 31);
-            this.FriendRoomBtn.TabIndex = 6;
-            this.FriendRoomBtn.Text = "Friend Room";
-            this.FriendRoomBtn.UseVisualStyleBackColor = false;
-            this.FriendRoomBtn.Click += new System.EventHandler(this.FriendRoomBtn_Click);
             // 
             // RevisionHub
             // 

@@ -73,7 +73,7 @@ namespace RevisionProgram2.revision.assessments.tests
 
             if (question.multipleChoice != -1)
             {
-                AnswersLbl.Text += Helper.twoLines + "Correct answer: " + question.answers[question.multipleChoice];
+                AnswersLbl.Text += "\n\nCorrect answer: " + question.answers[question.multipleChoice];
             }
 
 

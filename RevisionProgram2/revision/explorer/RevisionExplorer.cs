@@ -121,7 +121,7 @@ namespace RevisionProgram2.revision
 
             if (!di.Exists)
             {
-                Helper.Error("Failed to open folder.", "Reason: The folder does not exist.");
+                Helper.Error("Failed to open folder.", "The folder does not exist.");
                 return;
             }
 
@@ -290,7 +290,7 @@ namespace RevisionProgram2.revision
                 AddPanel(moveItem, true);
             } catch (Exception ex)
             {
-                Helper.Error("Failed to move item.", $"Reason: {ex.Message}");
+                Helper.Error("Failed to move item.", ex.Message);
             }
 
             moveItem = null;

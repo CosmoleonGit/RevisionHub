@@ -41,7 +41,7 @@
             // 
             this.ScoreLbl.BackColor = System.Drawing.Color.Transparent;
             this.ScoreLbl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ScoreLbl.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.ScoreLbl.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ScoreLbl.Location = new System.Drawing.Point(0, 0);
             this.ScoreLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ScoreLbl.Name = "ScoreLbl";

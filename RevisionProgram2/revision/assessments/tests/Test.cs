@@ -22,6 +22,7 @@ namespace RevisionProgram2.revision.tests
     {
         public const string testVersion = "1";
         public Test(string _name, string _dir) : base(_name, _dir) { }
+        public Test(string _path) : base(_path) { }
 
         public static void Create(string dir, Action onNameGet, Action<string, string> onFinish)
         {
@@ -71,6 +72,11 @@ namespace RevisionProgram2.revision.tests
             });
 
             
+        }
+
+        internal void LoadAndStart(object p, Action<TestResults> onResults, object onFinish)
+        {
+            throw new NotImplementedException();
         }
 
         private Question[] questions;
@@ -125,7 +131,7 @@ namespace RevisionProgram2.revision.tests
             }
             catch (Exception ex)
             {
-                Helper.Error("Failed to open test.", $"Reason: {ex.Message}");
+                Helper.Error("Failed to open test.", ex.Message);
                 return false;
             }
         }
@@ -134,14 +140,13 @@ namespace RevisionProgram2.revision.tests
         {
             if (!TryLoadQuestions())
             {
-                Helper.Error("Error loading questions.", "Reason: Incorrect formatting.");
                 return;
             }
 
             bool shuffle = false;
 
             settings?.SaveSettings();
-
+            
             switch (Properties.Settings.Default.testSort)
             {
                 case 1:
@@ -152,73 +157,80 @@ namespace RevisionProgram2.revision.tests
                     Helper.ShuffleArray(ref questions);
                     break;
             }
-
+            
             StartTest(name, questions, shuffle, onFinish);
         }
 
-        internal static void StartTest(string name, Question[] questions, bool shuffle, Action onFinish = null)
+        public void LoadAndStart(Action onFinish = null, Action<TestResults> onResults = null, bool oneOff = false)
+        {
+            if (!TryLoadQuestions())
+            {
+                return;
+            }
+
+            StartTest(name, questions, false, onFinish, onResults, oneOff);
+        }
+
+        internal static void StartTest(string name, 
+                                       IEnumerable<Question> questions, 
+                                       bool shuffle, 
+                                       Action onFinish = null,
+                                       Action<TestResults> onResults = null,
+                                       bool oneOff = false)
         {
             var tester = new TestTester(name, questions, Properties.Settings.Default.testSkippable);
 
-            Action testFinish = null;
-
-            testFinish = () =>
+            void testFinish()
             {
-                if (tester.DialogResult == DialogResult.OK) // Finished test
-                {
-                    bool end = false;
-
-                    var results = new ResultsForm(name, tester.questions);
-
-                    results.FormClosing += (s, e) =>
-                    {
-                        var result = results.DialogResult;
-
-                        if (result == DialogResult.Cancel || result == DialogResult.None)   // Clicked exit or X
-                        {
-                            end = true;
-                        }
-                        else if (result == DialogResult.OK) // Clicked Try Again
-                        {
-                            // Reshuffle questions
-
-                            if (shuffle) Helper.ShuffleArray(ref questions);
-                            tester = new TestTester(name, questions, Properties.Settings.Default.testSkippable);
-                            tester.onFinish = testFinish;
-                        }
-                        else   // Clicked Test Incorrect Answers
-                        {
-                            var questionList = new List<Question>();
-
-                            foreach (AskingQuestion q in results.questions)
-                            {
-                                if (!q.Correct) questionList.Add(q.question);
-                            }
-
-                            var qArr = questionList.ToArray();
-                            if (shuffle) Helper.ShuffleArray(ref qArr);
-
-                            tester = new TestTester(name, qArr, Properties.Settings.Default.testSkippable);
-                            tester.onFinish = testFinish;
-                        }
-
-                        if (!end)
-                        {
-                            tester.Show();
-                        }
-                        else
-                        {
-                            onFinish?.Invoke();
-                        }
-                    };
-
-                    results.Show();
-                }
-                else
+                if (tester.DialogResult != DialogResult.OK)
                 {
                     onFinish?.Invoke();
+                    return;
                 }
-            };
+
+                var results = tester.Results;
+                onResults?.Invoke(results);
+
+                var resultForm = new ResultsForm(name, results, oneOff);
+
+                resultForm.FormClosing += (s, e) =>
+                {
+                    var result = resultForm.DialogResult;
+
+                    switch (result)
+                    {
+                        default:
+                            // The user has exited the test.
+                            onFinish?.Invoke();
+                            return;
+                        case DialogResult.Abort:
+                            // The user is testing incorrect answers.
+                            var incorrect = results.Incorrect.Select(x => x.question);
+
+                            if (shuffle) incorrect.Shuffle();
+
+                            tester = new TestTester(name, incorrect, Properties.Settings.Default.testSkippable)
+                            {
+                                onFinish = testFinish
+                            };
+                            break;
+                        case DialogResult.OK:
+                            // Try again
+                            // Reshuffle questions
+
+                            if (shuffle) questions.Shuffle();
+                            tester = new TestTester(name, questions, Properties.Settings.Default.testSkippable)
+                            {
+                                onFinish = testFinish
+                            };
+                            break;
+                    }
+
+                    tester.Show();
+                };
+
+                resultForm.Show();
+            }
 
             tester.onFinish = testFinish;
 
@@ -356,8 +368,6 @@ namespace RevisionProgram2.revision.tests
             {
                 return TextInput.dirNameValid(s) && !Helper.Exists(dir + s);
             });
-
-            
         }
     }
 }

@@ -11,9 +11,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RevisionProgram2.netRoom
+namespace RevisionProgram2.onlineFeatures.netRoom
 {
     public delegate void MessageEvent(string message);
+    public delegate void ChallengeEvent();
     public partial class ChatRoom : Form
     {
         public ChatRoom(string _username)
@@ -28,37 +29,44 @@ namespace RevisionProgram2.netRoom
         readonly List<string> memberNames;
 
         public event MessageEvent MessageSent;
+        public event ChallengeEvent AcceptedChallenge, DeclinedChallenge;
 
         public void ReceiveMessage(string message)
         {
-            Invoke((MethodInvoker)delegate ()
-            {
-                if (ChatTxt.Text.Length != 0)
-                    ChatTxt.AppendText(Environment.NewLine);
-                ChatTxt.AppendText(message);
-            });
+            if (!IsDisposed)
+                Invoke((MethodInvoker)delegate ()
+                {
+                    if (ChatTxt.Text.Length != 0)
+                        ChatTxt.AppendText(Environment.NewLine);
+                    ChatTxt.AppendText(message);
+                });
         }
 
-        public void AddMember(string name)
+        public void AddMember(string name, bool silent = false)
         {
             memberNames.Add(name);
-            ReceiveMessage($"{name} has joined.");
+            RefreshMemberList();
+            if (!silent) ReceiveMessage($"{name} has joined.");
         }
 
         public void RemoveMember(string name)
         {
             memberNames.Remove(name);
+            RefreshMemberList();
             ReceiveMessage($"{name} has left.");
         }
 
         void RefreshMemberList()
         {
-            MembersLbl.Text = username;
-
-            foreach (var member in memberNames) 
+            Invoke((MethodInvoker)delegate ()
             {
-                MembersLbl.Text += $"\n{member}";
-            }
+                MembersLbl.Text = username;
+
+                foreach (var member in memberNames)
+                {
+                    MembersLbl.Text += $"\n{member}";
+                }
+            });
         }
 
         internal BackgroundWorker GetWorker => NetworkWorker;
@@ -70,13 +78,15 @@ namespace RevisionProgram2.netRoom
 
         private void SendBtn_Click(object sender, EventArgs e)
         {
-            MessageSent(SendTxt.Text);
-            ReceiveMessage($"({username}) {SendTxt.Text}");
+            MessageSent?.Invoke(SendTxt.Text);
+            ReceiveMessage($"({username}) {SendTxt.Text.Trim()}");
             SendTxt.Text = "";
         }
 
         private void ChatRoom_Load(object sender, EventArgs e)
         {
+            MembersLbl.Text = username;
+            
             Icon = Properties.Resources.Revision_Program;
 
             Theme.ChangeFormTheme(this);
@@ -87,6 +97,61 @@ namespace RevisionProgram2.netRoom
         private void ChatRoom_FormClosing(object sender, FormClosingEventArgs e)
         {
             NetRoomPeer.CurrentRoom = null;
+        }
+
+        private void AcceptBtn_Click(object sender, EventArgs e)
+        {
+            AcceptedChallenge?.Invoke();
+            HideChallenge();
+        }
+
+        private void DeclineBtn_Click(object sender, EventArgs e)
+        {
+            DeclinedChallenge?.Invoke();
+            HideChallenge();
+        }
+
+        public void ReceiveChallenge(string username, string testName)
+        {
+            Invoke((MethodInvoker)delegate ()
+            {
+                ChallengeLbl.Text = $"{username} has challenged everyone to {testName}.";
+
+                ChallengeGroup.Visible = true;
+                ChatTxt.Height = ChallengeGroup.Top - ChatTxt.Top - 6;
+
+                DeclineBtn.Text = "Decline";
+                AcceptBtn.Visible = true;
+            });
+        }
+
+        public void BeginChallenge(string username, string testName)
+        {
+            ReceiveChallenge(username, testName);
+
+            Invoke((MethodInvoker)delegate ()
+            {
+                DeclineBtn.Text = "Cancel";
+                AcceptBtn.Visible = false;
+            });
+        }
+
+        private void SendTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendBtn.PerformClick();
+                e.SuppressKeyPress = true;
+            }  
+        }
+
+        public void HideChallenge()
+        {
+            Invoke((MethodInvoker)delegate ()
+            {
+                ChallengeGroup.Visible = false;
+                ChatTxt.Height = MessagePanel.Top - ChatTxt.Top - 6;
+            });
         }
     }
 }

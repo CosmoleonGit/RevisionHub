@@ -159,7 +159,7 @@ namespace RevisionProgram2.revision.flashcards
                 return true;
             } catch(Exception ex)
             {
-                Helper.Error("Failed to open flashcards.", $"Reason: {ex.Message}");
+                Helper.Error("Failed to open flashcards.", ex.Message);
                 return false;
             }
         }
@@ -168,7 +168,6 @@ namespace RevisionProgram2.revision.flashcards
         {
             if (!TryLoadCards())
             {
-                Helper.Error("Error loading flashcards.", "Reason: Incorrect formatting.");
                 return;
             }
 
@@ -179,7 +178,7 @@ namespace RevisionProgram2.revision.flashcards
             StartFlashcards(name, cards, onFinish);
         }
 
-        internal static void StartFlashcards(string name, Card[] cards, Action onFinish = null)
+        internal static void StartFlashcards(string name, IEnumerable<Card> cards, Action onFinish = null)
         {
             var tester = new FlashcardTester(name, cards)
             {
@@ -245,19 +244,11 @@ namespace RevisionProgram2.revision.flashcards
 
             if (TryLoadCards())
             {
-
-                var questions = new List<Question>();
-
                 Organize(ref cards);
 
-                foreach (Card card in cards)
-                {
-                    questions.Add(new Question(card.side1, new string[] { card.side2 }, -1));
-                }
+                var questions = cards.Select(x => new Question(x.side1, new string[] { x.side2 }, -1));
 
-                Test.StartTest(name, questions.ToArray(), Properties.Settings.Default.testSkippable);
-
-                
+                Test.StartTest(name, questions, Properties.Settings.Default.testSkippable);
             }
         }
 
