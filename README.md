@@ -1,8 +1,4 @@
-I made this program as a tool for myself and some of my friends do revision for exams and subjects as a whole.
-
-This project helped me drastically improve my abilities in C# aswell and is when I began to use GitHub.
-
-While I will update this a little in the future I will stray away from WinForms from now on and focus on WPF and UWP for desktop applications instead.
+An app to help with revision, especially for exams.
 
 Here is a generalized list of all of its features:
 
